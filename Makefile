@@ -4,7 +4,7 @@ THESIS = thesis
 # 各子文件目录
 TEX_DIR = tex
 BIB_DIR = bib
-FIG_DIR = figure
+FIG_DIR = figures
 
 # ------------------------------
 # You needn't change belowing

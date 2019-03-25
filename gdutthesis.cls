@@ -129,36 +129,20 @@
   {\newpage}
   {\thispagestyle{empty}\newpage}
   {}{}
-% 章节标题所在页也有页码
-\patchcmd{\chapter}
-  {\thispagestyle{\CTEX@chapter@pagestyle}}
-  {}{}{}
-\patchcmd{\@chapter}
-  {\if@twocolumn}
-  {\addtocontents{loa}{\protect\addvspace{10\p@}}
-   \if@twocolumn}
-  {}{}
+%\patchcmd{\chapter}
+%  {\thispagestyle{\CTEX@chapter@pagestyle}} % 章节标题所在页也有页码
+%  {}{}{}
+%\patchcmd{\@chapter}
+%  {\if@twocolumn}
+%  {\addtocontents{loa}{\protect\addvspace{10\p@}}
+%   \if@twocolumn}
+%  {}{}
 \patchcmd\tableofcontents
   {\chapter}
   {\cleardoublepage
-   \pdfbookmark[0]{\contentsname}{toc} % 增加索引
+   \pdfbookmark[0]{目录}{toc} % 增加索引
    \chapter}
   {}{}
-
-
-
-%%%%%%%%%%
-% 页面设置
-%%%%%%%%%%
-\RequirePackage{geometry} % 设置版面
-\geometry{
-  paper      = a4paper,
-  top        = 3.0cm,
-  bottom     = 2.5cm,
-  left       = 3.0cm,
-  right      = 2.0cm,
-}
-
 
 %%%%%%%%%%
 % PDF信息设置
@@ -183,19 +167,62 @@ citecolor=black,
   }
 }
 
+
 %%%%%%%%%%
-% 页码、章节编号设置
+% 页面设置
 %%%%%%%%%%
+\RequirePackage{geometry} % 设置版面
+\geometry{
+  paper      = a4paper,
+  top        = 3.0cm,
+  bottom     = 2.5cm,
+  left       = 3.0cm,
+  right      = 2.0cm,
+}
 
 
 %%%%%%%%%%
-% 字号设置
+% 页眉页脚设置
 %%%%%%%%%%
-%\setmainfont{Optima}   %% 不指定，使用Tex的默认英文衬线字体
-%\setmonofont{Monaco}   % 英文等宽字体
-%\setsansfont{Trebuchet MS} % 英文无衬线字体
+
+% 去除目录页码
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+% 正文前部分页码显示方为罗马数字应用页面样式plain
+\renewcommand\frontmatter{
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagestyle{plain}
+  \pagenumbering{roman}
+}
+
+% 正文显示为阿拉伯数字应用页面样式fancy
+\renewcommand\mainmatter{
+  \cleardoublepage
+  \@mainmattertrue
+  \pagestyle{fancy}
+  \pagenumbering{arabic}
+}
+
+\RequirePackage{fancyhdr}
+% 正文页眉页脚设置
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[RO]{\leftmark} % 章名
+\fancyhead[LE]{\rightmark} % 节名
+\fancyfoot[LE,RO]{\thepage}
+
+\fancypagestyle{plain}{
+   \fancyhf{}
+   \fancyfoot[LE,RO]{\thepage}
+   \renewcommand{\headrulewidth}{0pt}
+}
+
+%%%%%%%%%%
+% 字号设置及章节名设置
+%%%%%%%%%%
 \ctexset{
-  contentsname   = 目~~录,
+  contentsname   = 目\quad \quad 录,
 %  listfigurename = ,
 %  listtablename  = ,
   autoindent     = true,
@@ -230,6 +257,11 @@ citecolor=black,
 }
 
 %%%%%%%%%%
+% 段落设置
+%%%%%%%%%%
+\linespread{1.5}
+
+%%%%%%%%%%
 % 绘制封面
 %%%%%%%%%%
 \renewcommand{\maketitle}{
@@ -237,8 +269,55 @@ citecolor=black,
 }
 
 % 绘制论文封面
+\RequirePackage{array}
+
 \newcommand\makethesistitle{
-	绘制封面
+  \cleardoublepage
+  \thispagestyle{empty}
+  % 插入校徽
+  \begin{figure}[t]
+    \includegraphics[width=0.15\linewidth]{gdut_logo}
+  \end{figure}
+  % 插入广工校名
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{gdut_tittle}
+  \end{figure}
+  
+  \begin{center}
+  % 标题
+  {
+    \zihao{2} \bfseries
+    \gdut@value@chinesedegree 毕业设计（论文）\\
+    \vskip \stretch{1}
+    \gdut@value@chinesetitle \\
+  }
+  \vskip \stretch{1}
+  {
+    \zihao{4}\bfseries
+    \def\arraystretch{1.5}
+    \begin{tabular}{r @{\quad} c}
+    %\tabcolsep20pt
+    学\quad \quad 院 & \gdut@value@college \\
+    \cline{2-2}
+    专\quad \quad 业 & \gdut@value@major \\
+    \cline{2-2}
+    年级班别 & \gdut@value@class \\
+    \cline{2-2}
+    学\quad \quad 号 & \gdut@value@studentnumber \\
+    \cline{2-2}
+    姓\quad \quad 名 & \gdut@value@author \\
+    \cline{2-2}
+    指导老师 & \gdut@value@advisor \\
+    \cline{2-2}
+    \end{tabular}
+  }
+  \end{center}
+  \vskip \stretch{1}
+  \begin{figure}[b]
+    \centering
+    \zihao{4} \gdut@value@submitdate \\
+  \end{figure}
 }
 
 %%%%%%%%%%
@@ -255,8 +334,8 @@ citecolor=black,
     \zihao{4} \markboth{Abstract}{}
   }{
     \pdfbookmark[0]{摘要}{abstract}
-    \chapter*{摘~~要}
-    \zihao{4} \markboth{摘~~要}{}
+    \chapter*{摘\quad \quad 要}
+    \zihao{4} \markboth{摘\quad \quad 要}{}
   }
 }{
   ~\\ \noindent
@@ -267,18 +346,9 @@ citecolor=black,
   }
 }
 
-\newenvironment{englishabstract}{%
-  \cleardoublepage
-  \chapter*{%
-    \MakeUppercase\sjtu@value@englishtitle
-    \vskip 20pt
-    \MakeUppercase\sjtu@label@englishabstract
-  }
-  \zihao{4} \markboth{\sjtu@label@englishabstract}{}
-}{
-  \vspace{2ex}\noindent
-  {\zihao{4} \textbf{\sjtu@label@englishkeywords}{\sjtu@value@englishkeywords}}
-}
+%%%%%%%%%%
+% 
+%%%%%%%%%%
 
 % include configureation file
 \AtEndOfClass{\input{configuration.cfg}}

@@ -84,7 +84,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \typeout{-- http://https://github.com/ElunDai/gdutthesis}
-\ProvidesClass{gdutthesis}[Guang dong University of Technology Template]
+\ProvidesClass{gdutthesis}[2019/4/27 V0.1 Guang dong University of Technology Template]
 
 % version number
 \def\IEEEtransversionmajor{0}
@@ -137,12 +137,6 @@
 %  {\addtocontents{loa}{\protect\addvspace{10\p@}}
 %   \if@twocolumn}
 %  {}{}
-\patchcmd\tableofcontents
-  {\chapter}
-  {\cleardoublepage
-   \pdfbookmark[0]{目录}{toc} % 增加索引
-   \chapter}
-  {}{}
 
 %%%%%%%%%%
 % PDF信息设置
@@ -157,7 +151,10 @@ linkcolor=black,
 anchorcolor=black,
 citecolor=black,
 ]{hyperref}
- % bookmarks
+
+%%%%%%%%%%
+% bookmarks
+%%%%%%%%%%
 \AtBeginDocument{
   \hypersetup{
     pdfauthor={\gdut@value@author},
@@ -178,44 +175,8 @@ citecolor=black,
   bottom     = 2.5cm,
   left       = 3.0cm,
   right      = 2.0cm,
-}
-
-
-%%%%%%%%%%
-% 页眉页脚设置
-%%%%%%%%%%
-
-% 去除目录页码
-\addtocontents{toc}{\protect\thispagestyle{empty}}
-
-% 正文前部分页码显示方为罗马数字应用页面样式plain
-\renewcommand\frontmatter{
-  \cleardoublepage
-  \@mainmatterfalse
-  \pagestyle{plain}
-  \pagenumbering{roman}
-}
-
-% 正文显示为阿拉伯数字应用页面样式fancy
-\renewcommand\mainmatter{
-  \cleardoublepage
-  \@mainmattertrue
-  \pagestyle{fancy}
-  \pagenumbering{arabic}
-}
-
-\RequirePackage{fancyhdr}
-% 正文页眉页脚设置
-\fancyhf{}
-\renewcommand{\headrulewidth}{0.4pt}
-\fancyhead[RO]{\leftmark} % 章名
-\fancyhead[LE]{\rightmark} % 节名
-\fancyfoot[LE,RO]{\thepage}
-
-\fancypagestyle{plain}{
-   \fancyhf{}
-   \fancyfoot[LE,RO]{\thepage}
-   \renewcommand{\headrulewidth}{0pt}
+  head       = 1.5cm,
+  foot       = 1.5cm,
 }
 
 %%%%%%%%%%
@@ -223,6 +184,7 @@ citecolor=black,
 %%%%%%%%%%
 \ctexset{
   contentsname   = 目\quad \quad 录,
+  bibname        = 参考文献,
 %  listfigurename = ,
 %  listtablename  = ,
   autoindent     = true,
@@ -261,6 +223,58 @@ citecolor=black,
 %%%%%%%%%%
 \linespread{1.5}
 
+
+%%%%%%%%%%
+% 页眉页脚设置
+%%%%%%%%%%
+\RequirePackage{fancyhdr}
+% 去除目录页码
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+\fancypagestyle{main}{
+  \renewcommand{\headrulewidth}{0.4pt}
+  \fancyhead[RO]{\leftmark} % 章名
+  \fancyhead[LE]{\rightmark} % 节名
+  \fancyfoot[LE,RO]{\thepage}
+}
+
+
+\fancypagestyle{plain}{
+   \fancyhf{}
+   \fancyfoot[LE,RO]{\thepage}
+   \renewcommand{\headrulewidth}{0pt}
+}
+
+% 正文前部分页码显示方为罗马数字应用页面样式plain
+\renewcommand\frontmatter{
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagestyle{plain}
+  \pagenumbering{roman}
+}
+
+% 正文显示为阿拉伯数字应用页面样式fancy
+\renewcommand\mainmatter{
+  \cleardoublepage
+  \@mainmattertrue
+  \pagestyle{main}
+  \pagenumbering{arabic}
+}
+
+%%%%%%%%%%
+% 目录设置
+%%%%%%%%%%
+\patchcmd\tableofcontents
+  {\chapter}
+  {\cleardoublepage
+   \pdfbookmark[0]{目录}{toc} % 增加索引
+   \chapter}
+  {}{}
+
+%%%%%%%%%%
+% 图
+%%%%%%%%%%
+
 %%%%%%%%%%
 % 绘制封面
 %%%%%%%%%%
@@ -276,12 +290,12 @@ citecolor=black,
   \thispagestyle{empty}
   % 插入校徽
   \begin{figure}[t]
-    \includegraphics[width=0.15\linewidth]{gdut_logo}
+    \includegraphics[width=0.15\linewidth]{figures/gdut_logo}
   \end{figure}
   % 插入广工校名
   \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\linewidth]{gdut_tittle}
+    \includegraphics[width=0.7\linewidth]{figures/gdut_title}
   \end{figure}
   
   \begin{center}
@@ -323,7 +337,6 @@ citecolor=black,
 %%%%%%%%%%
 % 摘要
 %%%%%%%%%%
-%\newif\ifgdut@abstracttype\sjtu@reviewfalse
 
 \RequirePackage{xifthen} % 判断语句
 \newenvironment{abstract}[1]{ % 传入 chinese | english
@@ -347,10 +360,77 @@ citecolor=black,
 }
 
 %%%%%%%%%%
-% 
+% 参考文献
 %%%%%%%%%%
+%\RequirePackage{cite}
+%\bibliographystyle{plain}
 
+\RequirePackage[
+  backend=biber,
+  style=gb7714-2015,
+  url=false,
+  doi=false,
+  eprint=true,
+]{biblatex}
+
+%%%%%%%%%%
+% 附录
+%%%%%%%%%%
+\RequirePackage{appendix}
+\renewcommand{\appendixname}{附录}
+\renewcommand{\appendixpagename}{附~~~~录}
+%\renewcommand{\appendixtocname}{附录}
+
+%%%%%%%%%%
+% 致谢
+%%%%%%%%%%
+\renewenvironment{thanks}{%
+  \chapter*{%
+    致~~~~谢
+    \markboth{致~~~~谢}{}
+  }
+  \addcontentsline{toc}{chapter}{致谢}
+}{}
+
+%%%%%%%%%%
+% 书脊
+%%%%%%%%%%
+\newcommand{\spine}{
+\cleardoublepage
+\thispagestyle{empty}
+\begin{figure}[h]
+\centering
+\vskip 2cm % 距离顶部2cm
+\begin{minipage}{1.5em}
+\zihao{4} \bfseries
+\gdut@value@chinesetitle
+\end{minipage}
+\end{figure}
+
+\vskip \stretch{1}
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{1.5em}
+\zihao{4} \bfseries
+\gdut@value@author
+\vskip 2cm % 姓名距离底学院2cm
+\gdut@value@college
+\end{minipage}
+\end{figure}
+
+\vskip 2cm % 距离底部2cm
+}
+
+
+%%%%%%%%%%
+% 列表
+%%%%%%%%%%
+\def\labelenumi{\arabic{enumi}、} % 列表样式 1、xxx 2、xxx
+
+%%%%%%%%%%
 % include configureation file
+%%%%%%%%%%
 \AtEndOfClass{\input{configuration.cfg}}
 
 \endinput

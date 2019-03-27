@@ -68,7 +68,7 @@ $(DIRSTRUCTURES):
 
 $(THESIS).tex:
 	@ echo "Auto generate "$(THESIS)".tex from template."
-	cp ./example/thesis_tmplate.tex $(THESIS).tex
+	$(CP) ./example/thesis_tmplate.tex $(THESIS).tex
 
 validate:
 	$(LATEX) -no-pdf -halt-on-error $(OUTDIR)/$(THESIS)

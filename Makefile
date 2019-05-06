@@ -90,4 +90,4 @@ view: all
 	$(Q) $(PDFVIEWER) $(TARGET)
 
 wordcount:
-	$(Q) texcount $(THESIS).tex
+	$(Q) texcount $(shell find . -name '*.tex')

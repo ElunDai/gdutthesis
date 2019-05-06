@@ -232,9 +232,9 @@ citecolor=black,
 \addtocontents{toc}{\protect\thispagestyle{empty}}
 
 \fancypagestyle{main}{
-  \renewcommand{\headrulewidth}{0.4pt}
-  \fancyhead[RO]{\leftmark} % 章名
-  \fancyhead[LE]{\rightmark} % 节名
+  \renewcommand{\headrulewidth}{0pt}
+  % \fancyhead[RO]{\leftmark} % 章名
+  % \fancyhead[LE]{\rightmark} % 节名
   \fancyfoot[LE,RO]{\thepage}
 }
 

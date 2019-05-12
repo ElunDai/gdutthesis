@@ -370,7 +370,7 @@ citecolor=black,
   style=gb7714-2015,
   url=false,
   doi=false,
-  eprint=true,
+  eprint=false,
 ]{biblatex}
 
 %%%%%%%%%%

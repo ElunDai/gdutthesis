@@ -205,7 +205,7 @@ citecolor=black,
     afterskip    = {1.0ex \@plus .2ex},
   },
   subsection={ % 条标题
-    format       = \zihao{-4}\heiti,
+    format       = \zihao{-4}\textbf,
     afterindent  = true,
     afterskip    = {1.0ex \@plus .2ex},
   },

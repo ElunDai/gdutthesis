@@ -43,6 +43,7 @@ LATEX = xelatex
 BIBTEX = biber
 # Option for latexmk
 LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directory obj/
+LATEX_FLAGS += -shell-escape # work with minted
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 

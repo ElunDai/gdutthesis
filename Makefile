@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = thesis
+THESIS = dyl
 
 # 各子文件目录
 TEX_DIR = tex
@@ -51,22 +51,12 @@ DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
 all: $(TARGET)
 
-xeletex: | mkdirstructure
-	$(LATEX) $(LATEX_FLAGS) $(THESIS)
-
-bibtex: | mkdirstructure
-	$(BIBTEX) $(OUTDIR)/$(THESIS)
-
-# $(OUTDIR)/$(THESIS).pdf: $(THESIS).tex $(SOURCES) gdutthesis.cls configuration.cfg Makefile | mkdirstructure
-$(TARGET): $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) $(SOURCES) configuration.cfg gdutthesis.cls | mkdirstructure
+$(TARGET): $(THESIS).tex $(SOURCES) $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) configuration.cfg gdutthesis.cls | mkdirstructure
 	$(warning make target)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	mv $(OUTDIR)/$(TARGET) .
 
-#$(if $(BIB_FILES), )
-
-#$(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) 
-$(OUTDIR)/$(THESIS).aux: $(TEX_FILES) $(FIG_FILES) | mkdirstructure
+$(OUTDIR)/$(THESIS).aux: $(THESIS).tex $(TEX_FILES) $(FIG_FILES) | mkdirstructure
 	$(warning make aux)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 
@@ -81,9 +71,19 @@ $(DIRSTRUCTURES):
 	$(warning make dir)
 	$(Q) if [ ! -d $@ ]; then mkdir $@; fi
 
+xeletex: | mkdirstructure
+	$(LATEX) $(LATEX_FLAGS) $(THESIS)
+
+bibtex: | mkdirstructure
+	$(BIBTEX) $(OUTDIR)/$(THESIS)
+
 $(THESIS).tex:
-	@ echo "Auto generate "$(THESIS)".tex from template."
-	$(CP) ./example/thesis_tmplate.tex $(THESIS).tex
+	$(error Could not found $@; Try `make init` to start a new project)
+
+init:
+	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/thesis.tex ${THESIS}.tex; fi
+	$(Q) if [ ! -d tex ]; then cp -r template/tex .; fi
+	$(Q) if [ ! -d bibs ]; then cp -r template/bibs .; fi
 
 validate:
 	$(LATEX) -no-pdf -halt-on-error $(OUTDIR)/$(THESIS)

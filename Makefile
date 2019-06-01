@@ -43,7 +43,7 @@ LATEX = xelatex
 BIBTEX = biber
 # Option for latexmk
 LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directory obj/
-LATEX_FLAGS += -shell-escape # work with minted
+# LATEX_FLAGS += -shell-escape # work with minted
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
@@ -51,20 +51,34 @@ DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
 all: $(TARGET)
 
+xeletex: | mkdirstructure
+	$(LATEX) $(LATEX_FLAGS) $(THESIS)
+
+bibtex: | mkdirstructure
+	$(BIBTEX) $(OUTDIR)/$(THESIS)
+
 # $(OUTDIR)/$(THESIS).pdf: $(THESIS).tex $(SOURCES) gdutthesis.cls configuration.cfg Makefile | mkdirstructure
-$(TARGET): $(OUTDIR)/$(THESIS).aux $(SOURCES) $(if $(BIB_FILES), obj/$(THESIS).bbl)| mkdirstructure
+$(TARGET): $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) $(SOURCES) configuration.cfg gdutthesis.cls | mkdirstructure
+	$(warning make target)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	mv $(OUTDIR)/$(TARGET) .
 
+#$(if $(BIB_FILES), )
+
+#$(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) 
 $(OUTDIR)/$(THESIS).aux: $(TEX_FILES) $(FIG_FILES) | mkdirstructure
+	$(warning make aux)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 
-$(OUTDIR)/$(THESIS).bbl: $(BIB_FILES) | $(OUTDIR)/$(THESIS).aux
+$(OUTDIR)/$(THESIS).bbl: $(SOURCES) | mkdirstructure
+	$(warning make bbl)
+	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	$(BIBTEX) $(OUTDIR)/$(THESIS)
 
 # 建立工程目录结构
 mkdirstructure: $(DIRSTRUCTURES)
 $(DIRSTRUCTURES):
+	$(warning make dir)
 	$(Q) if [ ! -d $@ ]; then mkdir $@; fi
 
 $(THESIS).tex:
@@ -82,10 +96,6 @@ clean:
 	$(Q) $(RM) -r $(OUTDIR)
 # 	$(Q) latexmk -c -silent 2> /dev/null
 # 	$(Q) $(RM) $(TEX_DIR)/*.aux 2> /dev/null || true
-
-
-git:
-	git push --tags github; git push github;
 
 view: all
 	$(Q) $(PDFVIEWER) $(TARGET)

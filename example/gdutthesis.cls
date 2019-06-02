@@ -1,0 +1,1 @@
+/home/ddyyll/my/workspace/project/elundai/gdutthesis/gdutthesis.cls

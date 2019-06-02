@@ -1,87 +1,3 @@
-% 格式要求
-% 毕业设计(论文)原则上要用 A4 复印纸打印
-
-% 页边距:上边距:30mm;下边距:25mm;左边距:30mm;右边距:20mm;行间距:1.5 倍行距;
-% 页码:论文页码从绪论部分开始,至附录,用阿拉伯数字连续编排,页码位于页脚右侧。封面、中英文设计说明(论文摘要)和目录不编入论文页码。
-
-% 字体和字号
-% 论 文 题目: 二号黑体加粗(封面)
-% 章 标 题: 三号黑体加粗
-% 节 标 题: 小四号黑体加粗
-% 条 标 题: 小四号黑体
-% 正 文: 小四号宋体
-% 页 码: 小五号 Times New Roman 体
-% 数字和字母: Times New Roman 体
-
-% 公式
-% 公式应另起一行写在稿纸中央,公式和编号之间不加虚线。
-% 公式较长时最好在等号“=”处转行
-% 公式序号按章编排,如第一章第一个公式序号为“(1.1)” , 附录 A 中的第一个公式为“(A1)”等
-% 用圆括号括起来放在公式右边行末。
-% 文中引用公式时,一般用“见式(1.1)”或“由公式(1.1)”。
-
-% 表格
-% 每个表格应有自己的表序和表题。并应在文中进行说明,例如:“如表 1.1”。
-% 表序一般按章编排,如第一章第一个插表的序号为“表 1.1”等。表序与表名之间空一格,表名中不允许使用标点符号,表名后不加标点。
-% 表序与表名置于表上居中(五号黑体加粗,数字和字母为五号 Times New Roman 体加粗)
-% 表头设计应简单明了,尽量不用斜线。表头与表格为一整体,不得拆开排写于两页。表格不加左右边线。
-% 全表如用同一单位,将单位符号移至表头右上角。
-% 表中数据应正确无误,书写清楚。数字空缺的格内加“-”字线(占 2 个数字),不允许用“”、“同上”之类的写法
-% 表内文字说明(五号宋体),起行空一格、转行顶格、句末不加标点。
-% 表中若有附注时,用小五号宋体,写在表的下方,句末加标点。
-% 仅有一条附注时写成:“注:...”;有多条附注时,附注各项的序号一律用阿拉伯数字,写成:“注:1....”。
-
-% 插图
-% 每幅插图均应有图题(由图号和图名组成)。图号按章编排,如第一章第一图的图号为“图 1.1”等。
-% 图题置于图下,用五号宋体。有图注或其他说明时应置于图题之上, 用小五号宋体。
-% 图名在图号之后空一格排写。引用图应说明出处,在图题右上角加引用文献号。
-% 图中若有分图时,分图号用(a)、(b)等置于分图之下。
-
-% 注释
-
-
-% 附录
-% 论文的附录依序用大写正体 A,B,C......编序号,如:附录 A。
-% 附录中的图、表、式等另行编序号,与正文分开,也一律用阿拉伯数字编码,但在数码前冠以附录序码,如:图 A1;表 B2;式(B3)等,见样张 10(1)、10(2)。
-
-
-% 论文题目：二号黑体加粗居中
-% 外语论文题目需中外文表示,外文题目另起行,小二号加粗
-% 学  院、专  业、年级班别、学  号、学生姓名、指导教师、年  月
-
-% 封面书脊
-% 论文题目、姓名：四号黑体加粗
-% 学院名称：小四号黑体加粗
-
-% 中文设计说明(论文摘要)
-% 摘要：三号黑体,加粗
-% 摘要正文后下空一行打印“关键词”三字(四号黑体,加粗)，最后一个关键词后不打标点符号
-% 摘要正文和关键词(小四号宋体,1.5 倍行距)
-
-% 英文设计说明(论文摘要)
-% 另起一页
-% 字号与中文摘要相同
-% 英文和汉语拼音一律为 Times New Roman 体
-
-% 目录
-% 理工、社科类专业目录的三级标题,建议按 1......、 1.1......、 1.1.1......的格式编写;
-% 外语类专业目录的三级标题,建议按I、A、a 的格式编写。
-% 目录中各章题序的阿拉伯数字用 Times New Roman 体,第一级标题用小四号黑体,
-% 其余用小四号宋体。
-
-% 设计(论文)正文
-% 每章应另起一页
-% 各章标题要突出重点、简明扼要。
-% 字数一般在 15 字以内, 不得使用标点符号。
-% 标题中尽量不采用英文缩写词,对必须采用者,应使用本行业的通用缩写词。
-% 层次为章(如“1”)、节(如“1.1”)、条(如“1.1.1”)、款(如“1、”)、项(如“(1)”)。
-% 若节后无需“条”时可直接列“款”、“项”。
-% “节”、“条”的段前、段后各设为 0.5 行
-
-% 参考文献的引用
-% 用上标的形式置于所引内容最末句的右上角,用小四号字体。所引参考文献编号用阿拉伯数字置于方括号中
-% 当提及的参考文献为文中直接说明时,其序号应该用小四号字与正文排齐,如“由文献[8, 10-14]可知”。
-
 \NeedsTeXFormat{LaTeX2e}
 \typeout{-- http://https://github.com/ElunDai/gdutthesis}
 \ProvidesClass{gdutthesis}[2019/4/27 V0.1 Guang dong University of Technology Template]
@@ -91,7 +7,7 @@
 \def\IEEEtransversionminor{1}
 
 % 论文类型
-\newif\ifgdut@coursepaper	\gdut@coursepaperfalse
+\newif\ifgdut@coursepaper\gdut@coursepaperfalse
 \DeclareOption{coursepaper}{\gdut@coursepapertrue}
 
 \newif\ifgdut@thesis		\gdut@thesisfalse
@@ -100,11 +16,22 @@
 % 基于ctexbook
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
-\PassOptionsToClass{zihao=-4}{ctexbook}
+\PassOptionsToClass{zihao=-4,fontset=none}{ctexbook}
 \PassOptionsToPackage{no-math}{fontspec}
+% 第三条 > 一、书写 > 毕业设计(论文)原则上要用 A4 复印纸打印
 \LoadClass[a4paper,UTF8]{ctexbook}
 
+%%%%%%%%%%
+% RequirePackage
+%%%%%%%%%%
+\RequirePackage{ulem}% 下划线修正
+\RequirePackage{xifthen} % 判断语句
+\RequirePackage{enumerate} % 列表
+\RequirePackage{enumitem} % 列表缩进
+
+%%%%%%%%%%
 % Define variable settings
+%%%%%%%%%%
 \newcommand\school[1]{\def\gdut@value@school{#1}} % 学校
 \renewcommand\title[1]{\def\gdut@value@chinesetitle{#1}} % 论文题目
 \newcommand\chinesedegree[1]{\def\gdut@value@chinesedegree{#1}} % 学位
@@ -118,6 +45,7 @@
 \newcommand\submitdate[1]{\def\gdut@value@submitdate{#1}} % 提交日期
 \newcommand\chinesekeywords[1]{\def\gdut@value@chinesekeywords{#1}} % 中文关键词
 \newcommand\englishkeywords[1]{\def\gdut@value@englishkeywords{#1}} % 英文关键词
+\newcommand\projectid[1]{\def\gdut@value@projectid{#1}} % 英文关键词
 
 
 %%%%%%%%%%
@@ -168,6 +96,9 @@ citecolor=black,
 %%%%%%%%%%
 % 页面设置
 %%%%%%%%%%
+
+% 第三条 > 六、论文页面设置 > 页边距:上边距:30mm;下边距:25mm;左边距:30mm;右边距:20mm;
+
 \RequirePackage{geometry} % 设置版面
 \geometry{
   paper      = a4paper,
@@ -179,57 +110,19 @@ citecolor=black,
   foot       = 1.5cm,
 }
 
-%%%%%%%%%%
-% 字号设置及章节名设置
-%%%%%%%%%%
-\ctexset{
-  contentsname   = 目\quad \quad 录,
-  bibname        = 参考文献,
-%  listfigurename = ,
-%  listtablename  = ,
-  autoindent     = true,
-  chapter={ % 章标题:
-    format       = \zihao{3}\bfseries\heiti\centering,
-    name         = {}, % 不需要中文的 第X章
-    number       = \thechapter, % 使用阿拉伯数字编号
-    nameformat   = {},
-    titleformat  = {},
-    aftername    = \quad,
-    afterindent  = true,
-    beforeskip   = {15\p@},
-    afterskip    = {12\p@},
-  },
-  section={ % 节标题
-    format       = \zihao{-4}\bfseries\heiti,
-    afterindent  = true,
-    afterskip    = {1.0ex \@plus .2ex},
-  },
-  subsection={ % 条标题
-    format       = \zihao{-4}\textbf,
-    afterindent  = true,
-    afterskip    = {1.0ex \@plus .2ex},
-  },
-  subsubsection={ %
-    format       = \normalsize\normalfont,
-    afterindent  = true,
-    afterskip    = {1.0ex \@plus .2ex},
-  },
-  paragraph/afterindent = true,
-  subparagraph/afterindent = true,
-}
 
 %%%%%%%%%%
 % 段落设置
 %%%%%%%%%%
+% 第三条 > 六、论文页面设置 > 行间距:1.5 倍行距
 \linespread{1.5}
-
 
 %%%%%%%%%%
 % 页眉页脚设置
 %%%%%%%%%%
 \RequirePackage{fancyhdr}
-% 去除目录页码
-\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+\addtocontents{toc}{\protect}
 
 \fancypagestyle{main}{
   \renewcommand{\headrulewidth}{0pt}
@@ -241,7 +134,7 @@ citecolor=black,
 
 \fancypagestyle{plain}{
    \fancyhf{}
-   \fancyfoot[LE,RO]{\thepage}
+   % \fancyfoot[LE,RO]{\thepage}
    \renewcommand{\headrulewidth}{0pt}
 }
 
@@ -261,6 +154,78 @@ citecolor=black,
   \pagenumbering{arabic}
 }
 
+
+%%%%%%%%%%
+% 字体设置
+%%%%%%%%%%
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
+\setCJKsansfont[BoldFont=Microsoft YaHei]{Microsoft YaHei}
+
+\setCJKfamilyfont{zhyahei}{Microsoft YaHei}
+\setCJKfamilyfont{zhkai}{KaiTi}
+\setCJKfamilyfont{zhfs}{FangSong}
+\setCJKfamilyfont{zhsong}{SimSun}
+\setCJKfamilyfont{zhhei}[AutoFakeBold]{SimHei} % 真不知道黑体加粗是哪个傻逼中国人发明的，好看吗？
+\setCJKfamilyfont{zhli}{LiSu}
+\setCJKfamilyfont{zhyou}{You Yuan}
+\NewDocumentCommand \songti   {}{\CJKfamily{zhsong}}
+\NewDocumentCommand \heiti    {}{\CJKfamily{zhhei}}
+\NewDocumentCommand \heiticu  {}{\heiti\bfseries}
+\NewDocumentCommand \fangsong {}{\CJKfamily{zhfs}}
+\NewDocumentCommand \kaishu   {}{\CJKfamily{zhkai}}
+\NewDocumentCommand \lishu    {}{\CJKfamily{zhli}}
+\NewDocumentCommand \youyuan  {}{\CJKfamily{zhyou}}
+\NewDocumentCommand \yahei    {}{\CJKfamily{zhyahei}}
+
+%%%%%%%%%%
+% 字号设置及章节名设置
+%%%%%%%%%%
+\ctexset{
+  contentsname   = 目\quad \quad 录,
+  bibname        = 参考文献,
+%  listfigurename = ,
+%  listtablename  = ,
+  autoindent     = true,
+  chapter={ % 章标题:
+    format       = \zihao{3}\heiticu\centering,
+    name         = {}, % 不需要中文的 第X章
+    number       = \thechapter, % 使用阿拉伯数字编号
+    nameformat   = {},
+    titleformat  = {},
+    aftername    = \quad,
+    afterindent  = true,
+    fixskip      = true,
+    beforeskip   = {0pt},
+    afterskip    = {20pt},
+  },
+  section={ % 节标题
+    format       = \zihao{-4}\heiticu,
+    afterindent  = true,
+    afterskip    = {1.0ex \@plus .2ex},
+  },
+  subsection={
+    format       = \zihao{-4}\heiti,
+    afterindent  = true,
+    afterskip    = {1.0ex \@plus .2ex},
+  },
+  paragraph/afterindent = true,
+  subparagraph/afterindent = true,
+}
+
+
+%%%%%%%%%%
+% 图表
+%%%%%%%%%%
+\RequirePackage[labelsep=quad,skip=10pt]{caption} % 表格图
+\DeclareCaptionFont{heiticu}{\heiticu}
+\captionsetup[table]{font={heiticu,small}}
+\captionsetup[figure]{font={small}}
+
+\RequirePackage[center,nooneline,small]{subfigure} % 子图
+
 %%%%%%%%%%
 % 目录设置
 %%%%%%%%%%
@@ -269,17 +234,18 @@ citecolor=black,
 %  {\cleardoublepage
 %   \pdfbookmark[0]{目录}{toc} % 增加索引
 %   \chapter}
-  {}{}
+%  {}{}
 
 \RequirePackage[subfigure, titles]{tocloft}
+\renewcommand{\cftpnumalign}{l}
 \renewcommand{\cftchapfont}{\heiti}
-%%%%%%%%%%
-% 图
-%%%%%%%%%%
+\renewcommand{\cftdotsep}{0}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
 %%%%%%%%%%
 % 绘制封面
 %%%%%%%%%%
+
 \renewcommand{\maketitle}{
 	\makethesistitle
 }
@@ -292,7 +258,7 @@ citecolor=black,
   \thispagestyle{empty}
   % 插入校徽
   \begin{figure}[t]
-    \includegraphics[width=0.15\linewidth]{figures/gdut_logo}
+    \includegraphics[width=0.14\linewidth]{figures/gdut_logo}
   \end{figure}
   % 插入广工校名
   \begin{figure}[h]
@@ -303,7 +269,7 @@ citecolor=black,
   \begin{center}
   % 标题
   {
-    \zihao{2} \bfseries
+    \zihao{2} \heiticu
     \gdut@value@chinesedegree 毕业设计（论文）\\
     \vskip \stretch{1}
     \gdut@value@chinesetitle \\
@@ -314,33 +280,22 @@ citecolor=black,
     \def\arraystretch{1.5}
     \begin{tabular}{r @{\quad} c}
     %\tabcolsep20pt
-    学\quad \quad 院 & \gdut@value@college \\
-    \cline{2-2}
-    专\quad \quad 业 & \gdut@value@major \\
-    \cline{2-2}
-    年级班别 & \gdut@value@class \\
-    \cline{2-2}
-    学\quad \quad 号 & \gdut@value@studentnumber \\
-    \cline{2-2}
-    姓\quad \quad 名 & \gdut@value@author \\
-    \cline{2-2}
-    指导老师 & \gdut@value@advisor \\
-    \cline{2-2}
+    学\quad \quad 院 & \uline{\hfill \gdut@value@college \hfill} \\
+    专\quad \quad 业 & \uline{\hfill \gdut@value@major \hfill} \\
+    年级班别 & \uline{\hfill \gdut@value@class \hfill} \\
+    学\quad \quad 号 & \uline{\hfill \gdut@value@studentnumber \hfill} \\
+    姓\quad \quad 名 & \uline{\hfill \gdut@value@author \hfill} \\
+    指导老师 & \uline{\hfill \gdut@value@advisor \hfill} \\
     \end{tabular}
+    \vfill
+    \gdut@value@submitdate \\
   }
   \end{center}
-  \vskip \stretch{1}
-  \begin{figure}[b]
-    \centering
-    \zihao{4} \gdut@value@submitdate \\
-  \end{figure}
 }
 
 %%%%%%%%%%
 % 摘要
 %%%%%%%%%%
-
-\RequirePackage{xifthen} % 判断语句
 \newenvironment{abstract}[1]{ % 传入 chinese | english
   \cleardoublepage
   \def\gdut@value@abstracttype{#1} % 储存#1到变量中给end evironment用
@@ -353,11 +308,17 @@ citecolor=black,
     \zihao{4} \markboth{摘\quad \quad 要}{}
   }
 }{
-  ~\\ \noindent
+  ~\\
+  ~\par
   \ifthenelse{\equal{\gdut@value@abstracttype}{english}}{
     \zihao{4}\textbf{Keywords: }\gdut@value@englishkeywords
   }{
-    \zihao{4}\textbf{关键词：}\gdut@value@chinesekeywords
+    \zihao{4}{\heiticu 关键词：}\gdut@value@chinesekeywords
+    \vskip \stretch{2}
+    \noindent
+    \zihao{5} 注：本设计(论文)题目来源于教师的国家级（或省部级、厅局级、校级、企业）科研项目，项目编号为：
+    \uline{\ifdefempty{\gdut@value@projectid}{\hspace{4em}}{\gdut@value@projectid}}。
+    \vskip \stretch{1}
   }
 }
 
@@ -428,7 +389,15 @@ citecolor=black,
 %%%%%%%%%%
 % 列表
 %%%%%%%%%%
-\def\labelenumi{\arabic{enumi}、} % 列表样式 1、xxx 2、xxx
+%\def\labelenumi{\arabic{enumi}、} % 列表样式 1、xxx 2、xxx
+
+\newenvironment{kuan}
+  {\begin{enumerate}[itemindent=\parindent,label={1、}]}
+  {\end{enumerate}}
+
+\newenvironment{xiang}
+  {\begin{enumerate}[label={(1)}]}
+  {\end{enumerate}}
 
 %%%%%%%%%%
 % 代码块

@@ -1,22 +1,25 @@
-\documentclass[doctor, openright, twoside]{gdutthesis}
+\documentclass[openright, twoside]{gdutthesis}
 
 \begin{document}
 
 % 生成封面
 \maketitle
 
-\frontmatter % 正文前的摘要部分（罗马数字页码）
-
-% 生成目录
-\tableofcontents
-
 % 生成书脊
 % \spine
+
+\frontmatter % 正文前的摘要部分（罗马数字页码）
 
 %%%%%%%%%%
 % 摘要
 %%%%%%%%%%
 \input{tex/abstract}
+
+%%%%%%%%%%
+% 目录
+%%%%%%%%%%
+\tableofcontents
+
 
 \mainmatter % 正文开始（阿拉伯数字页码）
 

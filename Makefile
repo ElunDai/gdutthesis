@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = dyl
+THESIS = example
 
 # 各子文件目录
 TEX_DIR = tex
@@ -33,7 +33,7 @@ TEX_FILES = $(shell find . -name '*.tex' -or -name '*.sty' -or -name '*.cls')
 BIB_FILES = $(shell find . -name '*.bib')
 BST_FILES = $(shell find . -name '*.bst')
 FIG_FILES = $(shell find $(FIG_DIR) -type f)
-SOURCES = $(TEX_FILES) $(BIB_FILES) $(BST_FILES) $(FIG_FILES)
+SOURCES = $(TEX_FILES) $(BIB_FILES) $(BST_FILES) $(FIG_FILES) configuration.cfg
 
 # 生成pdf的文件名
 TARGET = $(THESIS).pdf

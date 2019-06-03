@@ -51,12 +51,12 @@ DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
 all: $(TARGET)
 
-$(TARGET): $(THESIS).tex $(SOURCES) $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) configuration.cfg gdutthesis.cls | mkdirstructure
+$(TARGET): $(THESIS).tex configuration.cfg $(SOURCES) $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) gdutthesis.cls | mkdirstructure
 	$(warning make target)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	mv $(OUTDIR)/$(TARGET) .
 
-$(OUTDIR)/$(THESIS).aux: $(THESIS).tex $(TEX_FILES) $(FIG_FILES) | mkdirstructure
+$(OUTDIR)/$(THESIS).aux: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) | mkdirstructure
 	$(warning make aux)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 
@@ -77,7 +77,7 @@ xeletex: | mkdirstructure
 bibtex: | mkdirstructure
 	$(BIBTEX) $(OUTDIR)/$(THESIS)
 
-$(THESIS).tex:
+$(THESIS).tex configuration.conf:
 	$(error Could not found $@; Try `make init` to start a new project)
 
 init:

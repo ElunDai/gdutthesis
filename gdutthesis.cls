@@ -219,9 +219,9 @@ citecolor=black,
 %%%%%%%%%%
 % 图表
 %%%%%%%%%%
-\RequirePackage[labelsep=quad,skip=10pt]{caption} % 表格图
+\RequirePackage[labelsep=quad]{caption} % 表格图
 \DeclareCaptionFont{heiticu}{\heiticu}
-\captionsetup[table]{font={heiticu,small}}
+\captionsetup[table]{font={heiticu,small},skip=0pt}
 \captionsetup[figure]{font={small}}
 
 \RequirePackage[center,nooneline,small]{subfigure} % 子图

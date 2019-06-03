@@ -1,4 +1,9 @@
 obj/
+example/obj
+example/gdutthesis.cls
+example/Makefile
+example/template
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

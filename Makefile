@@ -81,9 +81,10 @@ $(THESIS).tex configuration.conf:
 	$(error Could not found $@; Try `make init` to start a new project)
 
 init:
-	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/thesis.tex ${THESIS}.tex; fi
-	$(Q) if [ ! -d tex ]; then cp -r template/tex .; fi
-	$(Q) if [ ! -d bibs ]; then cp -r template/bibs .; fi
+	$(Q) if [ ! -f ${THESIS}.tex]; then cp template/thesis.tex.template ${THESIS}.tex; fi
+	$(Q) if [ ! -d tex ]; then cp -r template/tex.template tex; fi
+	$(Q) if [ ! -d bibs ]; then cp -r template/bibs.template bibs; fi
+	$(Q) if [ ! -f configuration.conf ]; then cp -r template/configuration.conf.template configuration.conf; fi
 
 validate:
 	$(LATEX) -no-pdf -halt-on-error $(OUTDIR)/$(THESIS)

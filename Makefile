@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = example
+THESIS = thesis
 
 # 各子文件目录
 TEX_DIR = tex
@@ -47,7 +47,7 @@ LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directo
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
-.PHONY: all bib validate cleanall pvc view wordcount git zip
+.PHONY: all bib validate cleanall pvc view wordcount git zip example
 
 all: $(TARGET)
 
@@ -86,10 +86,6 @@ init:
 	$(Q) if [ ! -d bibs ]; then cp -r template/bibs.template bibs; fi
 	$(Q) if [ ! -f configuration.cfg ]; then cp -r template/configuration.cfg.template configuration.cfg; fi
 
-test:
-	$(warning $(wildcard template/tex.template/*.template))
-	$(warning $(subst .template,,$(wildcard template/tex.template/*.template)))
-
 validate:
 	$(LATEX) -no-pdf -halt-on-error $(OUTDIR)/$(THESIS)
 	$(BIBTEX) --debug $(OUTDIR)/$(THESIS)
@@ -107,3 +103,6 @@ view: all
 
 wordcount:
 	$(Q) texcount $(shell find . -name '*.tex')
+
+example:
+	$(MAKE) -C example/

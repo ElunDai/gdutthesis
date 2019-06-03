@@ -1,0 +1,47 @@
+\documentclass[openright, twoside]{gdutthesis}
+
+\begin{document}
+
+% 生成封面
+\maketitle
+
+% 生成书脊
+% \spine
+
+\frontmatter % 正文前的摘要部分（罗马数字页码）
+
+%%%%%%%%%%
+% 摘要
+%%%%%%%%%%
+\input{tex/abstract}
+
+%%%%%%%%%%
+% 目录
+%%%%%%%%%%
+\tableofcontents
+
+
+\mainmatter % 正文开始（阿拉伯数字页码）
+
+% 诸论
+\input{tex/introduction}
+
+% 正文
+%\input{tex/body}
+%\input{tex/chapter2} % 可以按章分开各个文件
+%...
+
+% 结论
+\input{tex/conclusion}
+
+% 参考文献
+\printbibliography[heading=bibintoc]
+
+\input{tex/appendix}
+
+\backmatter % 文后无编号部分
+
+% 致谢
+\input{tex/thanks}
+
+\end{document}

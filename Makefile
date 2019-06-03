@@ -77,14 +77,18 @@ xeletex: | mkdirstructure
 bibtex: | mkdirstructure
 	$(BIBTEX) $(OUTDIR)/$(THESIS)
 
-$(THESIS).tex configuration.conf:
+$(THESIS).tex configuration.cfg:
 	$(error Could not found $@; Try `make init` to start a new project)
 
 init:
-	$(Q) if [ ! -f ${THESIS}.tex]; then cp template/thesis.tex.template ${THESIS}.tex; fi
+	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/thesis.tex.template ${THESIS}.tex; fi
 	$(Q) if [ ! -d tex ]; then cp -r template/tex.template tex; fi
 	$(Q) if [ ! -d bibs ]; then cp -r template/bibs.template bibs; fi
-	$(Q) if [ ! -f configuration.conf ]; then cp -r template/configuration.conf.template configuration.conf; fi
+	$(Q) if [ ! -f configuration.cfg ]; then cp -r template/configuration.cfg.template configuration.cfg; fi
+
+test:
+	$(warning $(wildcard template/tex.template/*.template))
+	$(warning $(subst .template,,$(wildcard template/tex.template/*.template)))
 
 validate:
 	$(LATEX) -no-pdf -halt-on-error $(OUTDIR)/$(THESIS)

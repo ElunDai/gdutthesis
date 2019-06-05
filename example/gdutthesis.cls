@@ -45,7 +45,8 @@
 \newcommand\submitdate[1]{\def\gdut@value@submitdate{#1}} % 提交日期
 \newcommand\chinesekeywords[1]{\def\gdut@value@chinesekeywords{#1}} % 中文关键词
 \newcommand\englishkeywords[1]{\def\gdut@value@englishkeywords{#1}} % 英文关键词
-\newcommand\projectid[1]{\def\gdut@value@projectid{#1}} % 英文关键词
+\newcommand\projectid[1]{\def\gdut@value@projectid{#1}} % 项目编号
+\newcommand\concentration[1]{\def\gdut@value@concentration{#1}} % 专业方向
 
 
 %%%%%%%%%%
@@ -241,6 +242,7 @@ citecolor=black,
 \renewcommand{\cftchapfont}{\heiti}
 \renewcommand{\cftdotsep}{0}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappagefont}{}
 
 %%%%%%%%%%
 % 绘制封面
@@ -278,10 +280,11 @@ citecolor=black,
   {
     \zihao{4}\heiti
     \def\arraystretch{1.5}
-    \begin{tabular}{r @{\quad} c}
+    \begin{tabular}{r @{\quad} p{6cm}<{\centering}}
     %\tabcolsep20pt
     学\quad \quad 院 & \uline{\hfill \gdut@value@college \hfill} \\
     专\quad \quad 业 & \uline{\hfill \gdut@value@major \hfill} \\
+    \ifthenelse{\equal{\gdut@value@concentration}{}}{}{& \uline{\hfill （\gdut@value@concentration） \hfill} \\}
     年级班别 & \uline{\hfill \gdut@value@class \hfill} \\
     学\quad \quad 号 & \uline{\hfill \gdut@value@studentnumber \hfill} \\
     姓\quad \quad 名 & \uline{\hfill \gdut@value@author \hfill} \\
@@ -385,19 +388,18 @@ citecolor=black,
 \vskip 2cm % 距离底部2cm
 }
 
+%%%%%%%%%%
+% 结论
+%%%%%%%%%%
+\newenvironment{conclusion}
+  {\chapter*{结~~~~论}\addcontentsline{toc}{chapter}{结论}}
+  {}
 
 %%%%%%%%%%
 % 列表
 %%%%%%%%%%
-%\def\labelenumi{\arabic{enumi}、} % 列表样式 1、xxx 2、xxx
-
-\newenvironment{kuan}
-  {\begin{enumerate}[itemindent=\parindent,label={1、}]}
-  {\end{enumerate}}
-
-\newenvironment{xiang}
-  {\begin{enumerate}[label={(1)}]}
-  {\end{enumerate}}
+\setlist[enumerate,1]{itemindent=\parindent,label={\arabic{enumi}、}}
+\setlist[enumerate,2]{label={(\arabic{enumii})}}
 
 %%%%%%%%%%
 % 代码块

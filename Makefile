@@ -52,23 +52,19 @@ DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 all: $(TARGET)
 
 $(TARGET): $(THESIS).tex configuration.cfg $(SOURCES) $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) gdutthesis.cls | mkdirstructure
-	$(warning make target)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	mv $(OUTDIR)/$(TARGET) .
 
 $(OUTDIR)/$(THESIS).aux: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) | mkdirstructure
-	$(warning make aux)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 
 $(OUTDIR)/$(THESIS).bbl: $(SOURCES) | mkdirstructure
-	$(warning make bbl)
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	$(BIBTEX) $(OUTDIR)/$(THESIS)
 
 # 建立工程目录结构
 mkdirstructure: $(DIRSTRUCTURES)
 $(DIRSTRUCTURES):
-	$(warning make dir)
 	$(Q) if [ ! -d $@ ]; then mkdir $@; fi
 
 xeletex: | mkdirstructure
@@ -104,5 +100,12 @@ view: all
 wordcount:
 	$(Q) texcount $(shell find . -name '*.tex')
 
-example:
-	$(MAKE) -C example/
+example: example/gdutthesis.cls example/Makefile
+	$(MAKE) -C example/ THESIS=example
+	$(PDFVIEWER) example/example.pdf
+
+example/gdutthesis.cls: gdutthesis.cls
+	$(Q) cp gdutthesis.cls example/gdutthesis.cls
+
+example/Makefile: Makefile
+	$(Q) cp Makefile example/Makefile

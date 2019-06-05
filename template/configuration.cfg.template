@@ -12,6 +12,7 @@
 \def\gdut@value@studentnumber{3115000000} % 学号
 \def\gdut@value@college{我的学院} % 学院
 \def\gdut@value@major{我的专业} % 专业
+\def\gdut@value@concentration{我的方向} % 专业方向
 \def\gdut@value@class{2015级(3)班} % 年级班别
 \def\gdut@value@author{我的名字} % 作者
 \def\gdut@value@advisor{我的导师} % 指导老师
@@ -36,6 +37,7 @@
 \usepackage{booktabs} % 
 \usepackage{rotating} % 横版图
 \usepackage{threeparttable} % 表格注释
+\usepackage{tabularx} % 增强表格
 
 
 \endinput

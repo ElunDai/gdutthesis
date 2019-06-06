@@ -21,6 +21,7 @@
 \def\gdut@value@chinesekeywords{关键词1，关键词2} % 中文关键词
 \def\gdut@value@englishkeywords{Keyword1, Keyword2} % 英文关键词
 \def\gdut@value@projectid{} % 项目编号
+\def\gdut@value@projecttype{} % 题目来源填写：企业|国家级科研|省部级科研|厅局级科研|校级科研
 
 %%%%%%%%%%
 % source directories

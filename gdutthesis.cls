@@ -19,7 +19,8 @@
 \PassOptionsToClass{zihao=-4,fontset=none}{ctexbook}
 \PassOptionsToPackage{no-math}{fontspec}
 % 第三条 > 一、书写 > 毕业设计(论文)原则上要用 A4 复印纸打印
-\LoadClass[a4paper,UTF8]{ctexbook}
+% 第三条 > 六、论文页面设置 > 行间距:1.5 倍行距，此处为比对Word修正后的值
+\LoadClass[a4paper,UTF8,linespread=1.63]{ctexbook}
 
 %%%%%%%%%%
 % RequirePackage
@@ -44,6 +45,7 @@
 \newcommand\chinesekeywords[1]{\def\gdut@value@chinesekeywords{#1}} % 中文关键词
 \newcommand\englishkeywords[1]{\def\gdut@value@englishkeywords{#1}} % 英文关键词
 \newcommand\projectid[1]{\def\gdut@value@projectid{#1}} % 项目编号
+\newcommand\projecttype[1]{\def\gdut@value@projecttype{#1}} % 题目来源, 填写企业项目|国家级|省部级|厅局级|校级
 \newcommand\concentration[1]{\def\gdut@value@concentration{#1}} % 专业方向
 
 
@@ -91,6 +93,9 @@ citecolor=black,
   }
 }
 
+%%%%%%%%%
+% 段落设置 
+%%%%%%%%%
 
 %%%%%%%%%%
 % 页面设置
@@ -108,13 +113,6 @@ citecolor=black,
   head       = 1.5cm,
   foot       = 1.5cm,
 }
-
-
-%%%%%%%%%%
-% 段落设置
-%%%%%%%%%%
-% 第三条 > 六、论文页面设置 > 行间距:1.5 倍行距
-\linespread{1.5}
 
 %%%%%%%%%%
 % 页眉页脚设置
@@ -203,12 +201,13 @@ citecolor=black,
   section={ % 节标题
     format       = \zihao{-4}\heiticu,
     afterindent  = true,
-    afterskip    = {1.0ex \@plus .2ex},
+    aftername    = \space,
+    afterskip    = {12pt},
   },
   subsection={
     format       = \zihao{-4}\heiti,
     afterindent  = true,
-    afterskip    = {1.0ex \@plus .2ex},
+    afterskip    = {8pt},
   },
   paragraph/afterindent = true,
   subparagraph/afterindent = true,
@@ -230,7 +229,7 @@ citecolor=black,
 %%%%%%%%%%
 %\patchcmd\tableofcontents
 %  {\chapter}
-%  {\cleardoublepage
+%  {%\cleardoublepage % 不需要固定在右边开启新章
 %   \pdfbookmark[0]{目录}{toc} % 增加索引
 %   \chapter}
 %  {}{}
@@ -245,7 +244,6 @@ citecolor=black,
 %%%%%%%%%%
 % 绘制封面
 %%%%%%%%%%
-
 \renewcommand{\maketitle}{
 	\makethesistitle
 }
@@ -258,27 +256,28 @@ citecolor=black,
   \thispagestyle{empty}
   % 插入校徽
   \begin{figure}[t]
-    \includegraphics[width=0.14\linewidth]{figures/gdut_logo}
+    \quad \quad\includegraphics[width=2.14cm]{figures/gdut_logo}
   \end{figure}
   % 插入广工校名
   \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/gdut_title}
+    \includegraphics[width=10.36cm]{figures/gdut_title}
   \end{figure}
-  
   \begin{center}
   % 标题
   {
-    \zihao{2} \heiticu
+    \heiticu
+    \zihao{1}
     \gdut@value@chinesedegree 毕业设计（论文）\\
     \vskip \stretch{1}
+    \zihao{2}
     \gdut@value@chinesetitle \\
   }
   \vskip \stretch{1}
   {
-    \zihao{4}\heiti
-    \def\arraystretch{1.5}
-    \begin{tabular}{r @{\quad} p{6cm}<{\centering}}
+    \zihao{3}\heiticu
+    \def\arraystretch{1}
+    \begin{tabular}{r @{\quad} p{7cm}<{\centering}}
     %\tabcolsep20pt
     学\quad \quad 院 & \uline{\hfill \gdut@value@college \hfill} \\
     专\quad \quad 业 & \uline{\hfill \gdut@value@major \hfill} \\
@@ -308,8 +307,8 @@ citecolor=black,
     \chapter*{摘\quad \quad 要}
     \zihao{4} \markboth{摘\quad \quad 要}{}
   }
+  \zihao{-4}
 }{
-  ~\\
   ~\par
   \ifthenelse{\equal{\gdut@value@abstracttype}{english}}{
     \zihao{4}\textbf{Keywords: }\gdut@value@englishkeywords
@@ -317,8 +316,9 @@ citecolor=black,
     \zihao{4}{\heiticu 关键词：}\gdut@value@chinesekeywords
     \vskip \stretch{2}
     \noindent
-    \zihao{5} 注：本设计(论文)题目来源于教师的国家级（或省部级、厅局级、校级、企业）科研项目，项目编号为：
-    \uline{\ifdefempty{\gdut@value@projectid}{\hspace{4em}}{\gdut@value@projectid}}。
+    \zihao{5}
+    \ifdefempty{\gdut@value@projectid}
+      {}{注：本设计(论文)题目来源于\gdut@value@projecttype 项目，项目编号为：\uline{\gdut@value@projectid}}。
     \vskip \stretch{1}
   }
 }
@@ -329,6 +329,7 @@ citecolor=black,
 %\RequirePackage{cite}
 %\bibliographystyle{plain}
 
+\renewcommand{\MakeUppercase}[1]{#1} % 强制首字母大写其他小写
 \RequirePackage[
   backend=biber,
   style=gb7714-2015,

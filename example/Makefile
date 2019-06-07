@@ -13,7 +13,7 @@ OUTDIR = obj
 # You needn't change belowing
 
 # Silence
-# Q = @
+Q = @
  
 # Set Pdf viewer
 UNAME := $(shell uname)
@@ -49,34 +49,56 @@ LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directo
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
-.PHONY: all bib validate cleanall pvc view wordcount git zip example cleanexample
+.PHONY: all xelatex bibtex validate cleanall view wordcount example cleanexample
 
 all: $(TARGET)
 
-$(TARGET): $(THESIS).tex configuration.cfg $(SOURCES) $(if $(BIB_FILES), $(OUTDIR)/$(THESIS).bbl) gdutthesis.cls | mkdirstructure
-	$(LATEX) $(LATEX_FLAGS) $(THESIS)
+# 创造别名
+xelatex: $(OUTDIR)/$(THESIS).aux
+bibtex: $(OUTDIR)/$(THESIS).bbl
+
+# 先检查规.need_latex则判断是否需要编译
+$(TARGET): $(OUTDIR)/.need_latex | mkdirstructure
+	$(info 编译$(THESIS).tex 原文)
+	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
+	$(info 生成$(OUTDIR)/$(THESIS).bbl参考文献)
+	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).bbl
+	$(info 修正交叉引用)
+	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
+	$(info 修正目录)
+	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
 	mv $(OUTDIR)/$(TARGET) .
 
-$(OUTDIR)/$(THESIS).aux: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) | mkdirstructure
-	$(LATEX) $(LATEX_FLAGS) $(THESIS)
+# 当源码发生改变的时候更新.need_latex标记
+$(OUTDIR)/.need_latex: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) gdutthesis.cls | mkdirstructure
+	$(Q) touch $(OUTDIR)/.need_latex
 
-$(OUTDIR)/$(THESIS).bbl: $(SOURCES) | mkdirstructure
+# 当.need_latex标记更新的时候才执行编译
+$(OUTDIR)/$(THESIS).aux: $(OUTDIR)/.need_latex
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
+	$(Q) # 提示有bib没有编译
+	$(Q) if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_bibtex; fi
+	$(Q) # 提示有bib编译后还需编译一次aux修正交叉引用
+	$(Q) if [ "`grep "Package biblatex Warning: Please rerun LaTeX." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_latex; fi
+
+$(OUTDIR)/.need_bibtex:
+	$(error please run `make xelatex` first)
+
+$(OUTDIR)/$(THESIS).bbl: $(OUTDIR)/.need_bibtex
 	$(BIBTEX) $(OUTDIR)/$(THESIS)
+	touch $(OUTDIR)/.need_latex
 
 # 建立工程目录结构
 mkdirstructure: $(DIRSTRUCTURES)
 $(DIRSTRUCTURES):
 	$(Q) if [ ! -d $@ ]; then mkdir $@; fi
 
-xelatex: | mkdirstructure
-	$(LATEX) $(LATEX_FLAGS) $(THESIS)
-
-bibtex: | mkdirstructure
-	$(BIBTEX) $(OUTDIR)/$(THESIS)
 
 $(THESIS).tex configuration.cfg:
 	$(error Could not found $@; Try `make init` to start a new project)
+
+test:
+	if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then echo touch $(OUTDIR)/.need_bibtex; fi
 
 init:
 	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/thesis.tex.template ${THESIS}.tex; fi
@@ -103,7 +125,7 @@ wordcount:
 	$(Q) texcount $(shell find . -name '*.tex')
 
 example: example/gdutthesis.cls example/Makefile
-	$(MAKE) -C example/ THESIS=example
+	$(MAKE) -C example/ THESIS = example
 	$(PDFVIEWER) example/example.pdf
 
 example/gdutthesis.cls: gdutthesis.cls
@@ -111,6 +133,7 @@ example/gdutthesis.cls: gdutthesis.cls
 
 example/Makefile: Makefile
 	$(Q) cp Makefile example/Makefile
+	sed -i 's/THESIS *=.*/THESIS = example
 
 cleanexample:
-	$(MAKE) -C example/ clean THESIS=example
+	$(MAKE) -C example/ clean THESIS = example

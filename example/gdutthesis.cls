@@ -240,6 +240,7 @@ citecolor=black,
 \renewcommand{\cftdotsep}{0}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftchappagefont}{}
+\renewcommand{\cftbeforechapskip}{8pt}
 
 %%%%%%%%%%
 % 绘制封面

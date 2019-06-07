@@ -84,7 +84,7 @@ $(TARGET): $(OUTDIR)/.need_latex | mkdirstructure setside
 	mv $(OUTDIR)/$(TARGET) .
 
 # 当源码发生改变的时候更新.need_latex标记
-$(OUTDIR)/.need_latex: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) gdutthesis.cls Makefile | mkdirstructure
+$(OUTDIR)/.need_latex: $(THESIS).tex $(BIB_FILES) $(TEX_FILES) $(FIG_FILES) configuration.cfg gdutthesis.cls Makefile | mkdirstructure
 	$(Q) touch $(OUTDIR)/.need_latex
 
 # 当.need_latex标记更新的时候才执行编译

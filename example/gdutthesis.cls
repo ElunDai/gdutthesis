@@ -58,9 +58,9 @@
   {\newpage}
   {\thispagestyle{empty}\newpage}
   {}{}
-%\patchcmd{\chapter}
-%  {\thispagestyle{\CTEX@chapter@pagestyle}} % 章节标题所在页也有页码
-%  {}{}{}
+\patchcmd{\chapter}
+  {\thispagestyle{\CTEX@chapter@pagestyle}} % 章节标题所在页也有页码
+  {}{}{}
 %\patchcmd{\@chapter}
 %  {\if@twocolumn}
 %  {\addtocontents{loa}{\protect\addvspace{10\p@}}

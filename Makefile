@@ -59,13 +59,13 @@ bibtex: $(OUTDIR)/$(THESIS).bbl
 
 # 先检查规.need_latex则判断是否需要编译
 $(TARGET): $(OUTDIR)/.need_latex | mkdirstructure
-	$(info 编译$(THESIS).tex 原文)
+	$(Q) echo 编译$(THESIS).tex 原文
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
-	$(info 生成$(OUTDIR)/$(THESIS).bbl参考文献)
+	$(Q) echo 生成$(OUTDIR)/$(THESIS).bbl参考文献
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).bbl
-	$(info 修正交叉引用)
+	$(Q) echo 修正交叉引用
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
-	$(info 修正目录)
+	$(Q) echo 修正目录
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
 	mv $(OUTDIR)/$(TARGET) .
 
@@ -125,7 +125,7 @@ wordcount:
 	$(Q) texcount $(shell find . -name '*.tex')
 
 example: example/gdutthesis.cls example/Makefile
-	$(MAKE) -C example/ THESIS = example
+	$(MAKE) -C example/
 	$(PDFVIEWER) example/example.pdf
 
 example/gdutthesis.cls: gdutthesis.cls
@@ -133,7 +133,7 @@ example/gdutthesis.cls: gdutthesis.cls
 
 example/Makefile: Makefile
 	$(Q) cp Makefile example/Makefile
-	sed -i 's/THESIS *=.*/THESIS = example
+	sed -i 's/THESIS *=.*/THESIS = example/' example/Makefile
 
 cleanexample:
-	$(MAKE) -C example/ clean THESIS = example
+	$(MAKE) -C example/ clean

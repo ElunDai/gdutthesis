@@ -31,6 +31,8 @@
 %\input{tex/chapter2} % 可以按章分开各个文件
 %...
 
+\backmatter % 恢复奇数页开启新章
+
 % 结论
 \input{tex/conclusion}
 
@@ -38,8 +40,6 @@
 \printbibliography[heading=bibintoc]
 
 \input{tex/appendix}
-
-\backmatter % 文后无编号部分
 
 % 致谢
 \input{tex/thanks}

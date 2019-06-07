@@ -146,9 +146,17 @@ citecolor=black,
 % 正文显示为阿拉伯数字应用页面样式fancy
 \renewcommand\mainmatter{
   \cleardoublepage
+  \let\cleardoublepageorign\cleardoublepage % 保存原始信息
+  \let\cleardoublepage\clearpage % 正文章节不需要从奇数页开始
   \@mainmattertrue
   \pagestyle{main}
   \pagenumbering{arabic}
+}
+
+%  文后部分
+\renewcommand\backmatter{
+  \let\cleardoublepage\cleardoublepageorign%还原成奇数页开启新章节
+  \cleardoublepage
 }
 
 
@@ -330,7 +338,8 @@ citecolor=black,
 %\RequirePackage{cite}
 %\bibliographystyle{plain}
 
-\renewcommand{\MakeUppercase}[1]{#1} % 强制首字母大写其他小写
+\let\MakeUppercaseorigin\MakeUppercase%储存原始设置
+\renewcommand{\MakeUppercase}[1]{#1}% 强制首字母大写其他小写
 \RequirePackage[
   backend=biber,
   style=gb7714-2015,
@@ -338,6 +347,7 @@ citecolor=black,
   doi=false,
   eprint=false,
 ]{biblatex}
+\let\MakeUppercase\MakeUppercaseorigin%还原原始设置
 
 %\RequirePackage[nottoc]{tocbibind}
 %\RequirePackage{gbt7714}

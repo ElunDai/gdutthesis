@@ -1,6 +1,9 @@
 # 论文主tex文件名
 THESIS = example
 
+# 翻页方向，留空表示不改变设置
+OPENSIDE = oneside
+
 # 各子文件目录
 TEX_DIR = tex
 BIB_DIR = bibs
@@ -27,6 +30,8 @@ ifeq ($(UNAME), Darwin)
 	PDFVIEWER = open
 endif
 
+
+
 # 搜索全部源码
 # SOURCES := $(shell find ./ -name "*.tex" -o -name "*.bib")
 TEX_FILES = $(shell find . -name '*.tex' -or -name '*.sty' -or -name '*.cls')
@@ -49,7 +54,7 @@ LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directo
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
-.PHONY: all xelatex bibtex validate cleanall view wordcount example cleanexample
+.PHONY: all xelatex bibtex validate cleanall view wordcount example cleanexample setside
 
 all: $(TARGET)
 
@@ -57,8 +62,17 @@ all: $(TARGET)
 xelatex: $(OUTDIR)/$(THESIS).aux
 bibtex: $(OUTDIR)/$(THESIS).bbl
 
+# set openside
+setside:
+ifeq ($(OPENSIDE),twoside)
+	sed -i 's/oneside/twoside/' $(THESIS).tex 
+endif
+ifeq ($(OPENSIDE),oneside)
+	sed -i 's/twoside/oneside/' $(THESIS).tex
+endif
+
 # 先检查规.need_latex则判断是否需要编译
-$(TARGET): $(OUTDIR)/.need_latex | mkdirstructure
+$(TARGET): $(OUTDIR)/.need_latex | mkdirstructure setside
 	$(Q) echo 编译$(THESIS).tex 原文
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
 	$(Q) echo 生成$(OUTDIR)/$(THESIS).bbl参考文献
@@ -70,7 +84,7 @@ $(TARGET): $(OUTDIR)/.need_latex | mkdirstructure
 	mv $(OUTDIR)/$(TARGET) .
 
 # 当源码发生改变的时候更新.need_latex标记
-$(OUTDIR)/.need_latex: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) gdutthesis.cls | mkdirstructure
+$(OUTDIR)/.need_latex: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) gdutthesis.cls Makefile | mkdirstructure
 	$(Q) touch $(OUTDIR)/.need_latex
 
 # 当.need_latex标记更新的时候才执行编译

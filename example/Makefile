@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = thesis
+THESIS = example
 
 # 各子文件目录
 TEX_DIR = tex
@@ -41,13 +41,15 @@ TARGET = $(THESIS).pdf
 # compiler
 LATEX = xelatex
 BIBTEX = biber
+#BIBTEX = bibtex
+
 # Option for latexmk
 LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directory obj/
 # LATEX_FLAGS += -shell-escape # work with minted
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
-.PHONY: all bib validate cleanall pvc view wordcount git zip example
+.PHONY: all bib validate cleanall pvc view wordcount git zip example cleanexample
 
 all: $(TARGET)
 
@@ -67,7 +69,7 @@ mkdirstructure: $(DIRSTRUCTURES)
 $(DIRSTRUCTURES):
 	$(Q) if [ ! -d $@ ]; then mkdir $@; fi
 
-xeletex: | mkdirstructure
+xelatex: | mkdirstructure
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 
 bibtex: | mkdirstructure
@@ -109,3 +111,6 @@ example/gdutthesis.cls: gdutthesis.cls
 
 example/Makefile: Makefile
 	$(Q) cp Makefile example/Makefile
+
+cleanexample:
+	$(MAKE) -C example/ clean THESIS=example

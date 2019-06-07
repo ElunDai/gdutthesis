@@ -338,6 +338,12 @@ citecolor=black,
   eprint=false,
 ]{biblatex}
 
+%\RequirePackage[nottoc]{tocbibind}
+%\RequirePackage{gbt7714}
+
+%\usepackage{natbib}
+%\bibliographystyle{unsrtnat}
+
 %%%%%%%%%%
 % 附录
 %%%%%%%%%%

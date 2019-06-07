@@ -77,6 +77,7 @@ bookmarksopen=true,
 colorlinks,
 pdfborder=001,
 linkcolor=black,
+urlcolor=black,
 anchorcolor=black,
 citecolor=black,
 ]{hyperref}
@@ -348,7 +349,7 @@ citecolor=black,
 
 \let\MakeUppercaseorigin\MakeUppercase%储存原始设置
 \preto{\printbibliography}{\renewcommand{\MakeUppercase}[1]{#1}}% 强制首字母大写其他小写
-\appto{\printbibliography}{\let\MakeUppercase\MakeUppercaseorigin}%还原原始设置
+%\appto{\printbibliography}{\let\MakeUppercase\MakeUppercaseorigin}%还原原始设置%会让引用出不来
 
 %\RequirePackage[nottoc]{tocbibind}
 %\RequirePackage{gbt7714}

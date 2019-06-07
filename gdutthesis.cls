@@ -338,8 +338,6 @@ citecolor=black,
 %\RequirePackage{cite}
 %\bibliographystyle{plain}
 
-\let\MakeUppercaseorigin\MakeUppercase%储存原始设置
-\renewcommand{\MakeUppercase}[1]{#1}% 强制首字母大写其他小写
 \RequirePackage[
   backend=biber,
   style=gb7714-2015,
@@ -347,7 +345,10 @@ citecolor=black,
   doi=false,
   eprint=false,
 ]{biblatex}
-\let\MakeUppercase\MakeUppercaseorigin%还原原始设置
+
+\let\MakeUppercaseorigin\MakeUppercase%储存原始设置
+\preto{\printbibliography}{\renewcommand{\MakeUppercase}[1]{#1}}% 强制首字母大写其他小写
+\appto{\printbibliography}{\let\MakeUppercase\MakeUppercaseorigin}%还原原始设置
 
 %\RequirePackage[nottoc]{tocbibind}
 %\RequirePackage{gbt7714}

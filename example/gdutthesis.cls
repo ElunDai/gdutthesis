@@ -136,7 +136,6 @@ citecolor=black,
   \fancyfoot[LE,RO]{\thepage}
 }
 
-
 \fancypagestyle{plain}{
    \fancyhf{}
    % \fancyfoot[LE,RO]{\thepage}
@@ -179,19 +178,26 @@ citecolor=black,
 
 \newcounter{thetranslate}
 \newcommand\translateenglish{
-  %\addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-原文}} %添加第八页
+  \addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-原文}}
   \def\leftmark{外文参考文献翻译-原文}
   \thispagestyle{translate}
   \stepcounter{thetranslate}
 }
 \newcommand\translatechinese{
-  %\setcounter{chapter}{thetranslate}
-  %\addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-译文}} %添加第八页
+  \addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-译文}}
   \def\leftmark{外文参考文献翻译-译文}
   \thispagestyle{translate}
+  \stepcounter{thetranslate}
 }
 
-%\stepcounter{equationschapter}
+% 1: chapter section subsection ...
+% 2: title
+% 3: pagenumber
+\newcommand\customertoc[3]{
+  \#1*{}
+  \setcounter{page}{#3}
+  \addcontentsline{toc}{#1}{#2}
+}
 
 %%%%%%%%%%
 % 字体设置

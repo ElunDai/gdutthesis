@@ -1,12 +1,12 @@
 \documentclass[openright, oneside]{gdutthesis}
 
-\usepackage{pdfpages}%  插入PDF
 \usepackage{zhlipsum}
 \usepackage{lipsum}
 
 \begin{document}
 
 \frontmatter % 正文前的摘要部分（罗马数字页码）
+\tableofcontents
 
 \mainmatter% 正文开始（阿拉伯数字页码）
 
@@ -31,7 +31,9 @@
 \end{nocleardoublepage}
 \zhlipsum[1-4]
 
+%\addtocontents{toc}{\setcounter{tocdepth}{-1}}
 \chapter{章节 b}
+%\addtocontents{toc}{\setcounter{tocdepth}{2}}
 \zhlipsum[1-4]
 
 \end{document}

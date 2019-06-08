@@ -97,6 +97,13 @@ citecolor=black,
 %%%%%%%%%
 % 段落设置 
 %%%%%%%%%
+% 取消分页
+\newenvironment{nocleardoublepage}{
+  \let\cleardoublepageorigin\cleardoublepage
+  \let\cleardoublepage\relax
+}{
+  \let\cleardoublepage\cleardoublepageorigin
+}
 
 %%%%%%%%%%
 % 页面设置
@@ -136,6 +143,12 @@ citecolor=black,
    \renewcommand{\headrulewidth}{0pt}
 }
 
+\fancypagestyle{translate}{
+  \fancyhead[C]{\huge \heiticu \chinese{thetranslate}、 \leftmark}
+  \fancyfoot[LE,RO]{\thepage}
+}
+
+
 % 正文前部分页码显示方为罗马数字应用页面样式plain
 \renewcommand\frontmatter{
   \cleardoublepage
@@ -160,6 +173,25 @@ citecolor=black,
   \cleardoublepage
 }
 
+%%%%%%%%%%
+% 论文翻译
+%%%%%%%%%%
+
+\newcounter{thetranslate}
+\newcommand\translateenglish{
+  %\addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-原文}} %添加第八页
+  \def\leftmark{外文参考文献翻译-原文}
+  \thispagestyle{translate}
+  \stepcounter{thetranslate}
+}
+\newcommand\translatechinese{
+  %\setcounter{chapter}{thetranslate}
+  %\addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-译文}} %添加第八页
+  \def\leftmark{外文参考文献翻译-译文}
+  \thispagestyle{translate}
+}
+
+%\stepcounter{equationschapter}
 
 %%%%%%%%%%
 % 字体设置
@@ -236,12 +268,12 @@ citecolor=black,
 %%%%%%%%%%
 % 目录设置
 %%%%%%%%%%
-%\patchcmd\tableofcontents
-%  {\chapter}
-%  {%\cleardoublepage % 不需要固定在右边开启新章
-%   \pdfbookmark[0]{目录}{toc} % 增加索引
-%   \chapter}
-%  {}{}
+\patchcmd\tableofcontents
+  {\chapter}
+  {\cleardoublepage
+   \pdfbookmark[0]{目录}{toc} % 增加索引
+   \chapter}
+  {}{}
 
 \RequirePackage[subfigure, titles]{tocloft}
 \renewcommand{\cftpnumalign}{l}
@@ -262,6 +294,7 @@ citecolor=black,
 \RequirePackage{array}
 
 \newcommand\makethesistitle{
+  \pdfbookmark[0]{封面}{cover}
   \cleardoublepage
   \thispagestyle{empty}
   % 插入校徽
@@ -306,31 +339,57 @@ citecolor=black,
 %%%%%%%%%%
 % 摘要
 %%%%%%%%%%
-\newenvironment{abstract}[1]{ % 传入 chinese | english
-  \cleardoublepage
-  \def\gdut@value@abstracttype{#1} % 储存#1到变量中给end evironment用
-  \ifthenelse{\equal{\gdut@value@abstracttype}{english}}{
-  	\chapter*{Abstract}
-    \zihao{4} \markboth{Abstract}{}
-  }{
-    \pdfbookmark[0]{摘要}{abstract}
-    \chapter*{摘\quad \quad 要}
-    \zihao{4} \markboth{摘\quad \quad 要}{}
-  }
+\RequirePackage{pgfkeys}
+
+\newif\ifabstractcontinue
+\newif\ifprojecttype
+\pgfkeys{
+  /abstract/.is family, /abstract,
+  language/.initial=,
+  keywords/.initial=,
+  keywordslabel/.initial=,
+  title/.initial=,
+  chinese/.style={title={摘\quad \quad 要},keywords={\gdut@value@chinesekeywords},
+    language=chinese,keywordslabel={关键词：}},
+  english/.style={title={Abstract},keywords={\gdut@value@englishkeywords},
+    language=english,keywordslabel={Keywords:~}},
+  continue/.is if=abstractcontinue,
+  continue=false,
+  projecttype/.is if=projecttype,
+  projecttype=true,
+}
+
+% 选项:
+% chinese 中文摘要
+% english 英文摘要
+% continue=true 连续排版不分成新页
+\newenvironment{abstract}[1]{
+  \pgfkeys{/abstract, #1}
+  \ifabstractcontinue
+    %\gdef\clearforchapter{}
+  \else
+    \cleardoublepage
+  \fi
+  %\chapter*{\pgfkeysvalueof{/abstract/title}}
+  {\zihao{3}\heiticu\centering \pgfkeysvalueof{/abstract/title}\par}
+  \vspace{20pt}
+  \ifthenelse{\equal{\pgfkeysvalueof{/abstract/language}}{chinese}}
+    {\pdfbookmark[0]{摘要}{zhabstract}}
+    {\pdfbookmark[0]{Abstract}{enabstract}}
   \zihao{-4}
 }{
   ~\par
-  \ifthenelse{\equal{\gdut@value@abstracttype}{english}}{
-    \zihao{4}\textbf{Keywords: }\gdut@value@englishkeywords
-  }{
-    \zihao{4}{\heiticu 关键词：}\gdut@value@chinesekeywords
+  {\zihao{4}\heiticu \pgfkeysvalueof{/abstract/keywordslabel}}\pgfkeysvalueof{/abstract/keywords}\par
+  \ifthenelse{\equal{\pgfkeysvalueof{/abstract/language}}{chinese}}{
     \vskip \stretch{2}
     \noindent
     \zihao{5}
-    \ifdefempty{\gdut@value@projectid}
-      {}{注：本设计(论文)题目来源于\gdut@value@projecttype 项目，项目编号为：\uline{\gdut@value@projectid}}。
-    \vskip \stretch{1}
-  }
+    \ifprojecttype
+      \ifdefempty{\gdut@value@projectid}
+        {}{注：本设计(论文)题目来源于\gdut@value@projecttype 项目，项目编号为：\uline{\gdut@value@projectid}}。
+      \vskip \stretch{1}
+    \fi
+  }{}
 }
 
 %%%%%%%%%%

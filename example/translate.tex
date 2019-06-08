@@ -1,0 +1,37 @@
+\documentclass[openright, oneside]{gdutthesis}
+
+\usepackage{pdfpages}%  插入PDF
+\usepackage{zhlipsum}
+\usepackage{lipsum}
+
+\begin{document}
+
+\frontmatter % 正文前的摘要部分（罗马数字页码）
+
+\mainmatter% 正文开始（阿拉伯数字页码）
+
+%%%%%%%%%%
+% 原文
+%%%%%%%%%%
+\chapter{chapter a}
+\translateenglish% 页眉加上标题
+\lipsum%
+%\includepdf[page=-]{resources/MaskR-CNN.pdf}
+
+%%%%%%%%%%
+% 译文
+%%%%%%%%%%
+\begin{abstract}{chinese,projecttype=false}
+  \translatechinese% 页眉加上标题
+  \zhlipsum[1]
+\end{abstract}
+
+\begin{nocleardoublepage}
+\chapter{章节 a}
+\end{nocleardoublepage}
+\zhlipsum[1-4]
+
+\chapter{章节 b}
+\zhlipsum[1-4]
+
+\end{document}

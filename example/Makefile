@@ -65,14 +65,18 @@ bibtex: $(OUTDIR)/$(THESIS).bbl
 # set openside
 setside:
 ifeq ($(OPENSIDE),twoside)
+ifneq ($(shell grep oneside $(THESIS).tex),)
 	sed -i 's/oneside/twoside/' $(THESIS).tex 
 endif
+endif
 ifeq ($(OPENSIDE),oneside)
-	sed -i 's/twoside/oneside/' $(THESIS).tex
+ifneq ($(shell grep twoside $(THESIS).tex),)
+	sed -i 's/twoside/oneside/' $(THESIS).tex 
+endif
 endif
 
 # 先检查规.need_latex则判断是否需要编译
-$(TARGET): $(OUTDIR)/.need_latex | mkdirstructure setside
+$(TARGET): $(OUTDIR)/.need_latex $(OUTDIR)/.need_bibtex | mkdirstructure setside
 	$(Q) echo 编译$(THESIS).tex 原文
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
 	$(Q) echo 生成$(OUTDIR)/$(THESIS).bbl参考文献
@@ -84,7 +88,7 @@ $(TARGET): $(OUTDIR)/.need_latex | mkdirstructure setside
 	mv $(OUTDIR)/$(TARGET) .
 
 # 当源码发生改变的时候更新.need_latex标记
-$(OUTDIR)/.need_latex: $(THESIS).tex configuration.cfg $(TEX_FILES) $(FIG_FILES) gdutthesis.cls Makefile | mkdirstructure
+$(OUTDIR)/.need_latex: $(THESIS).tex $(TEX_FILES) $(FIG_FILES) configuration.cfg gdutthesis.cls Makefile | mkdirstructure
 	$(Q) touch $(OUTDIR)/.need_latex
 
 # 当.need_latex标记更新的时候才执行编译
@@ -95,8 +99,8 @@ $(OUTDIR)/$(THESIS).aux: $(OUTDIR)/.need_latex
 	$(Q) # 提示有bib编译后还需编译一次aux修正交叉引用
 	$(Q) if [ "`grep "Package biblatex Warning: Please rerun LaTeX." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_latex; fi
 
-$(OUTDIR)/.need_bibtex:
-	$(error please run `make xelatex` first)
+$(OUTDIR)/.need_bibtex: $(BIB_FILES) | mkdirstructure
+	touch $(OUTDIR)/.need_bibtex
 
 $(OUTDIR)/$(THESIS).bbl: $(OUTDIR)/.need_bibtex
 	$(BIBTEX) $(OUTDIR)/$(THESIS)

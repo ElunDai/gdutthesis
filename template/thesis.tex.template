@@ -2,13 +2,13 @@
 
 \begin{document}
 
+\frontmatter % 正文前的摘要部分（罗马数字页码）
+
 % 生成封面
 \maketitle
 
 % 生成书脊
 % \spine
-
-\frontmatter % 正文前的摘要部分（罗马数字页码）
 
 %%%%%%%%%%
 % 摘要

@@ -3,13 +3,13 @@
 
 \begin{document}
 
+\frontmatter % 正文前的摘要部分（罗马数字页码）
+
 % 生成封面
 \maketitle
 
 % 生成书脊
 % \spine
-
-\frontmatter % 正文前的摘要部分（罗马数字页码）
 
 %%%%%%%%%%
 % 摘要
@@ -24,7 +24,7 @@
 ......\par
 \end{abstract}
 
-\begin{abstract}{english}
+\begin{abstract}{english,continue=true}
 Fiber-optic reflective displacement sensor attracts much attention for its particular
 advantages, such as simply theory, easy realization, good stability and so on. With the
 requirement of wide measurement range and high precision, it is re-designed based on the
@@ -57,7 +57,7 @@ finished at the beginning of this project, I will mainly describe the electric c
 \subsection{有限元计算结果及分析}
 
 \chapter{I级叶/盘转子错频方案的对比分析}
-asd
+
 在叶轮机械领域,对一个实际的叶盘转子,错频是指由于单个叶片之间因几何上
 或结构上的不同而造成的其在固有频率上的差异。\par
 
@@ -66,7 +66,7 @@ asd
 \section{多自由度系统的强迫响应分析}
 
 由前面的分析可知,响应分析在数学上是一个具有 38 个自由度的二阶线性微分方
-程的数值积分问题\cite{article}。\par
+程的数值积分问题。\par
 
 \subsection{动态响应的计算方法}
 
@@ -141,7 +141,6 @@ asd
   \label{fig:tuan}
 \end{figure}
 
-\backmatter % 文后无编号部分
 
 % 结论
 \input{tex/conclusion}
@@ -149,9 +148,11 @@ asd
 % 参考文献
 \printbibliography[heading=bibintoc]
 
+\input{tex/appendix}
+
+\backmatter % 文后无编号部分
+
 % 致谢
 \input{tex/thanks}
-
-\input{tex/appendix}
 
 \end{document}

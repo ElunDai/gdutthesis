@@ -47,3 +47,14 @@
 
 - [ ] “节”、“条”的段前、段后各设为 0.5 行
 - [ ] 
+
+# 翻译
+
+```
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{一、外文参考文献翻译-原文}{1}{chapter.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{二、外文参考文献翻译-译文}{13}{chapter.1}
+\defcounter {refsection}{0}\relax 
+```

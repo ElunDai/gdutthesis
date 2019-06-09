@@ -45,7 +45,7 @@
     afterindent  = true,
     fixskip      = true,
     beforeskip   = {0.8\baselineskip},
-    afterskip    = {0.84\baselineskip},
+    afterskip    = {0.66\baselineskip},
   },
   section={ % 节标题
     format       = \zihao{5}\heiticu,

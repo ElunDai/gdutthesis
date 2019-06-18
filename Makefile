@@ -67,11 +67,13 @@ setside:
 ifeq ($(OPENSIDE),twoside)
 ifneq ($(shell grep oneside $(THESIS).tex),)
 	sed -i 's/oneside/twoside/' $(THESIS).tex 
+	$(Q) touch $(OUTDIR)/.$(THESIS)_need_latex
 endif
 endif
 ifeq ($(OPENSIDE),oneside)
 ifneq ($(shell grep twoside $(THESIS).tex),)
 	sed -i 's/twoside/oneside/' $(THESIS).tex 
+	$(Q) touch $(OUTDIR)/.$(THESIS)_need_latex
 endif
 endif
 
@@ -98,6 +100,8 @@ $(OUTDIR)/$(THESIS).aux: $(OUTDIR)/.need_latex
 	$(Q) if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_bibtex; fi
 	$(Q) # 提示有bib编译后还需编译一次aux修正交叉引用
 	$(Q) if [ "`grep "Package biblatex Warning: Please rerun LaTeX." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_latex; fi
+	$(Q) # 提示有交叉引用需要重新编译
+	$(Q) if [ "`grep "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_latex; fi
 
 $(OUTDIR)/.need_bibtex: $(BIB_FILES) | mkdirstructure
 	touch $(OUTDIR)/.need_bibtex

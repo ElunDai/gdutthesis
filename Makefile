@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = thesis
+THESIS = example
 
 # 翻页方向，留空表示不改变设置
 OPENSIDE = oneside
@@ -65,6 +65,7 @@ bibtex: $(OUTDIR)/$(THESIS).bbl
 # set openside
 setside:
 ifeq ($(OPENSIDE),twoside)
+ifneq ($(wildcard $(THESIS).tex),)
 ifneq ($(shell grep oneside $(THESIS).tex),)
 	sed -i 's/oneside/twoside/' $(THESIS).tex 
 	$(Q) touch $(OUTDIR)/.$(THESIS)_need_latex
@@ -74,6 +75,7 @@ ifeq ($(OPENSIDE),oneside)
 ifneq ($(shell grep twoside $(THESIS).tex),)
 	sed -i 's/twoside/oneside/' $(THESIS).tex 
 	$(Q) touch $(OUTDIR)/.$(THESIS)_need_latex
+endif
 endif
 endif
 

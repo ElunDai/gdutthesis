@@ -156,18 +156,6 @@ citecolor=black,
 \newcommand{\custtabcaption}[1]{\caption*{\heiticu #1}} % 在图环境伪造表的caption样式
 
 %%%%%%%%%%
-% 绘制封面
-%%%%%%%%%%
-\renewcommand{\maketitle}{
-	\makeexcellenttitle
-}
-
-
-\newcommand\makeexcellenttitle{
-  你好
-}
-
-%%%%%%%%%%
 % include configureation file
 %%%%%%%%%%
 \AtEndOfClass{\input{configuration.cfg}}

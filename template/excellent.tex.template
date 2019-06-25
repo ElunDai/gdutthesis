@@ -1,62 +1,56 @@
-\documentclass[openright, oneside]{gdutthesis-excellent}
+\documentclass[openright, oneside]{gdutthesis}
 
 \begin{document}
-\renewcommand{\baselinestretch}{1.5}
-{\centering
-\vspace*{20pt}
-\zihao{2}\bfseries
-\chinesetitle\par
-\vspace*{16pt}
-\normalfont \zihao{5}\kaishu
-  \author\footnote{\zihao{6}\footnotetext} \quad\quad 指导老师：\advisor\\
-  \normalfont\zihao{-5}(广东工业大学\college，广州，510090)
 
-}
+%%%%%%%%%%
+% 生成封面
+%%%%%%%%%%
 
-\begin{flushleft}
-\setlength\leftskip{4em}
-\setlength\rightskip{4em}
-\renewcommand{\baselinestretch}{1.46}
-\setlength{\parindent}{2em}
-\hangindent 3em
-\kaishu\zihao{-5}
-{\quad\quad\heiticu 摘\quad 要：}\input{tex/excellent-abstract_zh}\\
-{\zihao{-5}\heiticu 关键词：}\chinesekeywords\\
-{\zihao{-5}\heiticu 评阅人评语：}\input{tex/excellent-comment}\\
-\end{flushleft}
+\maketitle
 
-\setlength\leftskip{2em}
-\setlength\rightskip{2em}
+\frontmatter % 正文前的摘要部分（罗马数字页码）
 
-\zihao{5}\normalfont 
-\input{tex/excellent-body}
+% 生成书脊
+% \spine
 
-\setlength{\baselineskip}{10pt}
-\renewcommand{\baselinestretch}{1}
-\begin{center}
-\zihao{5}\heiticu 参考文献
-\end{center}
+%%%%%%%%%%
+% 摘要
+%%%%%%%%%%
+\input{tex/abstract}
 
-\renewcommand{\baselinestretch}{1.2}
-\zihao{5}\kaishu
-\setlength{\parindent}{0em}
-\zihao{-5}
-\input{tex/excellent-reference}
+%%%%%%%%%%
+% 目录
+%%%%%%%%%%
 
-\vspace{36pt}
+% 生成目录
+\tableofcontents
 
-\renewcommand{\baselinestretch}{1.2}
-{
-\centering
-\zihao{4}\textbf{\englishtitle}\\
-\zihao{-4}\authoren\\
-}
-\zihao{5}
-\noindent\textbf{Abstract: }\input{tex/excellent-abstract_en}\par
-\noindent\textbf{Key words: }\zihao{-5}\englishkeywords\par
-\vspace*{20pt}
+%%%%%%%%%%
+% 正文
+%%%%%%%%%%
 
- \setcounter{chapter}{0}%重新计数章编号
-\input{tex/excellent-bodyen}
+\mainmatter % 正文开始（阿拉伯数字页码）
+
+% 诸论
+\input{tex/introduction}
+
+% 正文
+\input{tex/body}
+\input{tex/latexexample}
+%\input{tex/chapter2} % 可以按章分开各个文件
+%...
+
+% 结论
+\input{tex/conclusion}
+
+\backmatter % 恢复奇数页开启新章
+
+% 参考文献
+\printbibliography[heading=bibintoc]
+
+% 致谢
+\input{tex/thanks}
+
+\input{tex/appendix}
 
 \end{document}

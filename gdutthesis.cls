@@ -31,24 +31,24 @@
 %%%%%%%%%%
 % Define variable settings
 %%%%%%%%%%
-\newcommand\school[1]{\def\school{#1}} % 学校
+\newcommand\setschool[1]{\def\school{#1}} % 学校
 \renewcommand\title[1]{\def\chinesetitle{#1}} % 论文题目
-\newcommand\englishtitle[1]{\def\englishtitle{#1}} % 论文英文题目
-\newcommand\chinesedegree[1]{\def\chinesedegree{#1}} % 学位
-\newcommand\studentnumber[1]{\def\studentnumber{#1}} % 学号
-\newcommand\institute[1]{\def\college{#1}} % 学院
-\newcommand\major[1]{\def\major{#1}} % 专业
-\newcommand\class[1]{\def\class{#1}} % 年级班别
-\newcommand\authorzh[1]{\def\author{#1}} % 作者
-\newcommand\authoren[1]{\def\authoren{#1}} % 作者英文名
-\newcommand\advisor[1]{\def\advisor{#1}} % 指导老师
-\newcommand\coursename[1]{\def\coursename{#1}} % 课程名称
-\newcommand\submitdate[1]{\def\submitdate{#1}} % 提交日期
-\newcommand\chinesekeywords[1]{\def\chinesekeywords{#1}} % 中文关键词
-\newcommand\englishkeywords[1]{\def\englishkeywords{#1}} % 英文关键词
-\newcommand\projectid[1]{\def\projectid{#1}} % 项目编号
-\newcommand\projecttype[1]{\def\projecttype{#1}} % 题目来源, 填写企业项目|国家级|省部级|厅局级|校级
-\newcommand\concentration[1]{\def\concentration{#1}} % 专业方向
+\newcommand\setenglishtitle[1]{\def\englishtitle{#1}} % 论文英文题目
+\newcommand\setchinesedegree[1]{\def\chinesedegree{#1}} % 学位
+\newcommand\setstudentnumber[1]{\def\studentnumber{#1}} % 学号
+\newcommand\setinstitute[1]{\def\college{#1}} % 学院
+\newcommand\setmajor[1]{\def\major{#1}} % 专业
+\newcommand\setclass[1]{\def\class{#1}} % 年级班别
+\newcommand\setauthor[1]{\def\author{#1}} % 作者
+\newcommand\setauthoren[1]{\def\authoren{#1}} % 作者英文名
+\newcommand\setadvisor[1]{\def\advisor{#1}} % 指导老师
+\newcommand\setcoursename[1]{\def\coursename{#1}} % 课程名称
+\newcommand\setsubmitdate[1]{\def\submitdate{#1}} % 提交日期
+\newcommand\setchinesekeywords[1]{\def\chinesekeywords{#1}} % 中文关键词
+\newcommand\setenglishkeywords[1]{\def\englishkeywords{#1}} % 英文关键词
+\newcommand\setprojectid[1]{\def\projectid{#1}} % 项目编号
+\newcommand\setprojecttype[1]{\def\projecttype{#1}} % 题目来源, 填写企业项目|国家级|省部级|厅局级|校级
+\newcommand\setconcentration[1]{\def\concentration{#1}} % 专业方向
 
 
 %%%%%%%%%%

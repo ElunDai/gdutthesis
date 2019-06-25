@@ -170,6 +170,6 @@ citecolor=black,
 %%%%%%%%%%
 % include configureation file
 %%%%%%%%%%
-\AtEndOfClass{\input{configuration-excellent.cfg}}
+\AtEndOfClass{\input{configuration.cfg}}
 
 \endinput

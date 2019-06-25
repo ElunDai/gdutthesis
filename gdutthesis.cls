@@ -31,24 +31,24 @@
 %%%%%%%%%%
 % Define variable settings
 %%%%%%%%%%
-\newcommand\school[1]{\def\gdut@value@school{#1}} % 学校
-\renewcommand\title[1]{\def\gdut@value@chinesetitle{#1}} % 论文题目
-\newcommand\englishtitle[1]{\def\gdut@value@englishtitle{#1}} % 论文英文题目
-\newcommand\chinesedegree[1]{\def\gdut@value@chinesedegree{#1}} % 学位
-\newcommand\studentnumber[1]{\def\gdut@value@studentnumber{#1}} % 学号
-\newcommand\institute[1]{\def\gdut@value@college{#1}} % 学院
-\newcommand\major[1]{\def\gdut@value@major{#1}} % 专业
-\newcommand\class[1]{\def\gdut@value@class{#1}} % 年级班别
-\renewcommand\author[1]{\def\gdut@value@author{#1}} % 作者
-\renewcommand\authoren[1]{\def\gdut@value@authoren{#1}} % 作者英文名
-\newcommand\advisor[1]{\def\gdut@value@advisor{#1}} % 指导老师
-\newcommand\coursename[1]{\def\gdut@value@coursename{#1}} % 课程名称
-\newcommand\submitdate[1]{\def\gdut@value@submitdate{#1}} % 提交日期
-\newcommand\chinesekeywords[1]{\def\gdut@value@chinesekeywords{#1}} % 中文关键词
-\newcommand\englishkeywords[1]{\def\gdut@value@englishkeywords{#1}} % 英文关键词
-\newcommand\projectid[1]{\def\gdut@value@projectid{#1}} % 项目编号
-\newcommand\projecttype[1]{\def\gdut@value@projecttype{#1}} % 题目来源, 填写企业项目|国家级|省部级|厅局级|校级
-\newcommand\concentration[1]{\def\gdut@value@concentration{#1}} % 专业方向
+\newcommand\school[1]{\def\school{#1}} % 学校
+\renewcommand\title[1]{\def\chinesetitle{#1}} % 论文题目
+\newcommand\englishtitle[1]{\def\englishtitle{#1}} % 论文英文题目
+\newcommand\chinesedegree[1]{\def\chinesedegree{#1}} % 学位
+\newcommand\studentnumber[1]{\def\studentnumber{#1}} % 学号
+\newcommand\institute[1]{\def\college{#1}} % 学院
+\newcommand\major[1]{\def\major{#1}} % 专业
+\newcommand\class[1]{\def\class{#1}} % 年级班别
+\renewcommand\author[1]{\def\author{#1}} % 作者
+\newcommand\authoren[1]{\def\authoren{#1}} % 作者英文名
+\newcommand\advisor[1]{\def\advisor{#1}} % 指导老师
+\newcommand\coursename[1]{\def\coursename{#1}} % 课程名称
+\newcommand\submitdate[1]{\def\submitdate{#1}} % 提交日期
+\newcommand\chinesekeywords[1]{\def\chinesekeywords{#1}} % 中文关键词
+\newcommand\englishkeywords[1]{\def\englishkeywords{#1}} % 英文关键词
+\newcommand\projectid[1]{\def\projectid{#1}} % 项目编号
+\newcommand\projecttype[1]{\def\projecttype{#1}} % 题目来源, 填写企业项目|国家级|省部级|厅局级|校级
+\newcommand\concentration[1]{\def\concentration{#1}} % 专业方向
 
 
 %%%%%%%%%%
@@ -89,10 +89,10 @@ citecolor=black,
 %%%%%%%%%%
 \AtBeginDocument{
   \hypersetup{
-    pdfauthor={\gdut@value@author},
-    pdftitle={\gdut@value@chinesetitle},
-    pdfsubject={\gdut@value@school\gdut@value@chinesedegree 毕业论文},
-    pdfkeywords={\gdut@value@chinesekeywords}
+    pdfauthor={\author},
+    pdftitle={\chinesetitle},
+    pdfsubject={\school\chinesedegree 毕业论文},
+    pdfkeywords={\chinesekeywords}
   }
 }
 
@@ -343,10 +343,10 @@ citecolor=black,
   {
     \heiticu
     \zihao{1}
-    \gdut@value@chinesedegree 毕业设计（论文）\\
+    \chinesedegree 毕业设计（论文）\\
     \vskip \stretch{1}
     \zihao{2}
-    \gdut@value@chinesetitle \\
+    \chinesetitle \\
   }
   \vskip \stretch{1}
   {
@@ -354,16 +354,16 @@ citecolor=black,
     \def\arraystretch{1}
     \begin{tabular}{r @{\quad} p{7cm}<{\centering}}
     %\tabcolsep20pt
-    {学\quad \quad 院} & \heiticu \uline{\hfill \gdut@value@college \hfill} \\
-    {专\quad \quad 业} & \heiticu \uline{\hfill \gdut@value@major \hfill} \\
-    \ifthenelse{\equal{\gdut@value@concentration}{}}{}{& \heiticu \uline{\hfill （\gdut@value@concentration） \hfill} \\}
-    {年级班别} & \heiticu \uline{\hfill \gdut@value@class \hfill} \\
-    {学\quad \quad 号} & \heiticu \uline{\hfill \gdut@value@studentnumber \hfill} \\
-    {姓\quad \quad 名} & \heiticu \uline{\hfill \gdut@value@author \hfill} \\
-    {指导老师} & \heiticu \uline{\hfill \gdut@value@advisor \hfill} \\
+    {学\quad \quad 院} & \heiticu \uline{\hfill \college \hfill} \\
+    {专\quad \quad 业} & \heiticu \uline{\hfill \major \hfill} \\
+    \ifthenelse{\equal{\concentration}{}}{}{& \heiticu \uline{\hfill （\concentration） \hfill} \\}
+    {年级班别} & \heiticu \uline{\hfill \class \hfill} \\
+    {学\quad \quad 号} & \heiticu \uline{\hfill \studentnumber \hfill} \\
+    {姓\quad \quad 名} & \heiticu \uline{\hfill \author \hfill} \\
+    {指导老师} & \heiticu \uline{\hfill \advisor \hfill} \\
     \end{tabular}
     \vfill
-    \gdut@value@submitdate \\
+    \submitdate \\
   }
   \end{center}
 }
@@ -381,9 +381,9 @@ citecolor=black,
   keywords/.initial=,
   keywordslabel/.initial=,
   title/.initial=,
-  chinese/.style={title={摘\quad \quad 要},keywords={\gdut@value@chinesekeywords},
+  chinese/.style={title={摘\quad \quad 要},keywords={\chinesekeywords},
     language=chinese,keywordslabel={关键词：}},
-  english/.style={title={Abstract},keywords={\gdut@value@englishkeywords},
+  english/.style={title={Abstract},keywords={\englishkeywords},
     language=english,keywordslabel={Keywords:~}},
   continue/.is if=abstractcontinue,
   continue=false,
@@ -417,8 +417,8 @@ citecolor=black,
     \noindent
     \zihao{5}
     \ifprojecttype
-      \ifdefempty{\gdut@value@projectid}
-        {}{注：本设计(论文)题目来源于\gdut@value@projecttype 项目，项目编号为：\uline{\gdut@value@projectid}}。
+      \ifdefempty{\projectid}
+        {}{注：本设计(论文)题目来源于\projecttype 项目，项目编号为：\uline{\projectid}}。
       \vskip \stretch{1}
     \fi
   }{}
@@ -433,7 +433,7 @@ citecolor=black,
 \RequirePackage[
   backend=biber,
   style=gb7714-2015,
-  url=false,
+  url=true,
   doi=false,
   eprint=false,
 ]{biblatex}
@@ -478,7 +478,7 @@ citecolor=black,
 \vskip 2cm % 距离顶部2cm
 \begin{minipage}{1.5em}
 \zihao{4} \bfseries
-\gdut@value@chinesetitle
+\chinesetitle
 \end{minipage}
 \end{figure}
 
@@ -488,9 +488,9 @@ citecolor=black,
 \centering
 \begin{minipage}{1.5em}
 \zihao{4} \bfseries
-\gdut@value@author
+\author
 \vskip 2cm % 姓名距离底学院2cm
-\gdut@value@college
+\college
 \end{minipage}
 \end{figure}
 

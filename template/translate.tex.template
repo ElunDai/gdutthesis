@@ -1,0 +1,27 @@
+\documentclass[openright, oneside]{gdutthesis}
+\usepackage{pdfpages}%  插入PDF
+
+\begin{document}
+
+\frontmatter % 正文前的摘要部分（罗马数字页码）
+\tableofcontents
+
+\mainmatter% 正文开始（阿拉伯数字页码）
+
+\setcounter{tocdepth}{0}
+
+%%%%%%%%%%
+% 译文
+%%%%%%%%%%
+\translatechinese% 加上标题
+\input{tex/translate-abstract} % 摘要
+
+\input{tex/translate-body} % 译文正文
+
+%%%%%%%%%%
+% 原文
+%%%%%%%%%%
+\translateenglish% 加上标题
+\includepdf[pages=-]{resources/Mask_R-CNN}
+
+\end{document}

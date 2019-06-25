@@ -1,7 +1,5 @@
 \documentclass[openright, oneside]{gdutthesis}
-
-\usepackage{zhlipsum}
-\usepackage{lipsum}
+\usepackage{pdfpages}%  插入PDF
 
 \begin{document}
 
@@ -10,32 +8,20 @@
 
 \mainmatter% 正文开始（阿拉伯数字页码）
 
-%%%%%%%%%%
-% 原文
-%%%%%%%%%%
-\chapter{chapter a}
-\translateenglish% 页眉加上标题
-
-你好啊\custcite{1}
-\lipsum%
-%\includepdf[page=-]{resources/MaskR-CNN.pdf}
+\setcounter{tocdepth}{0}
 
 %%%%%%%%%%
 % 译文
 %%%%%%%%%%
-\begin{abstract}{chinese,projecttype=false}
-  \translatechinese% 页眉加上标题
-  \zhlipsum[1]
-\end{abstract}
+\translatechinese% 加上标题
+\input{tex/translate-abstract} % 摘要
 
-\begin{nocleardoublepage}
-\chapter{章节 a}
-\end{nocleardoublepage}
-\zhlipsum[1-4]
+\input{tex/translate-body} % 译文正文
 
-%\addtocontents{toc}{\setcounter{tocdepth}{-1}}
-\chapter{章节 b}
-%\addtocontents{toc}{\setcounter{tocdepth}{2}}
-\zhlipsum[1-4]
+%%%%%%%%%%
+% 原文
+%%%%%%%%%%
+\translateenglish% 加上标题
+\includepdf[pages=-]{resources/Mask_R-CNN}
 
 \end{document}

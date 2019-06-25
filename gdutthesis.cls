@@ -39,7 +39,7 @@
 \newcommand\institute[1]{\def\college{#1}} % 学院
 \newcommand\major[1]{\def\major{#1}} % 专业
 \newcommand\class[1]{\def\class{#1}} % 年级班别
-\renewcommand\author[1]{\def\author{#1}} % 作者
+\newcommand\authorzh[1]{\def\author{#1}} % 作者
 \newcommand\authoren[1]{\def\authoren{#1}} % 作者英文名
 \newcommand\advisor[1]{\def\advisor{#1}} % 指导老师
 \newcommand\coursename[1]{\def\coursename{#1}} % 课程名称

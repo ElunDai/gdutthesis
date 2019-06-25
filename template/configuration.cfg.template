@@ -6,24 +6,24 @@
 %%%%%%%%%%
 % Define variables
 %%%%%%%%%%
-\def\gdut@value@school{广东工业大学} % 学校
-\def\gdut@value@chinesedegree{本科} % 学位
-\def\gdut@value@chinesetitle{我的论文题目}  % 论文题目
-\def\gdut@value@englishtitle{my english title}  % 论文英文题目
-\def\gdut@value@studentnumber{3115000000} % 学号
-\def\gdut@value@college{我的学院} % 学院
-\def\gdut@value@major{我的专业} % 专业
-\def\gdut@value@concentration{我的方向} % 专业方向
-\def\gdut@value@class{2015级(3)班} % 年级班别
-\def\gdut@value@author{我的名字} % 作者
-\def\gdut@value@authoren{my name} % 作者英文名
-\def\gdut@value@advisor{我的导师} % 指导老师
-\def\gdut@value@coursename{} % 课程名称(课程报告用)
-\def\gdut@value@submitdate{\today} % 提交日期
-\def\gdut@value@chinesekeywords{关键词1，关键词2} % 中文关键词
-\def\gdut@value@englishkeywords{Keyword1, Keyword2} % 英文关键词
-\def\gdut@value@projectid{} % 项目编号
-\def\gdut@value@projecttype{} % 题目来源填写：企业|国家级科研|省部级科研|厅局级科研|校级科研
+\def\school{广东工业大学} % 学校
+\def\chinesedegree{本科} % 学位
+\def\chinesetitle{我的论文题目}  % 论文题目
+\def\englishtitle{my english title}  % 论文英文题目
+\def\studentnumber{3115000000} % 学号
+\def\college{我的学院} % 学院
+\def\major{我的专业} % 专业
+\def\concentration{我的方向} % 专业方向
+\def\class{2015级(3)班} % 年级班别
+\def\author{我的名字} % 作者
+\def\authoren{my name} % 作者英文名
+\def\advisor{我的导师} % 指导老师
+\def\coursename{} % 课程名称(课程报告用)
+\def\submitdate{\today} % 提交日期
+\def\chinesekeywords{关键词1，关键词2} % 中文关键词
+\def\englishkeywords{Keyword1, Keyword2} % 英文关键词
+\def\projectid{} % 项目编号
+\def\projecttype{} % 题目来源填写：企业|国家级科研|省部级科研|厅局级科研|校级科研
 
 \def\footnotetext{姓名(199?—)，男，物联网工程专业 2019届毕业生，工学学士。} % 优秀毕业论文脚注
 

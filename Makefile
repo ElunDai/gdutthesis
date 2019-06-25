@@ -129,7 +129,7 @@ test:
 	if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then echo touch $(OUTDIR)/.$(THESIS)_need_bibtex; fi
 
 init:
-	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/thesis.tex.template ${THESIS}.tex; fi
+	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/$(THESIS).tex.template ${THESIS}.tex; fi
 	$(Q) if [ ! -d tex ]; then cp -r template/tex.template tex; fi
 	$(Q) if [ ! -d bibs ]; then cp -r template/bibs.template bibs; fi
 	$(Q) if [ ! -f configuration.cfg ]; then cp -r template/configuration.cfg.template configuration.cfg; fi

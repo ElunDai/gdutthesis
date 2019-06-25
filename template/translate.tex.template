@@ -22,6 +22,6 @@
 % 原文
 %%%%%%%%%%
 \translateenglish% 加上标题
-\includepdf[pages=-]{resources/Mask_R-CNN}
+\includepdf[pages=-]{path/to/paper.pdf} % 在此处输入原文pdf路径
 
 \end{document}

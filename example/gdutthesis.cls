@@ -33,12 +33,14 @@
 %%%%%%%%%%
 \newcommand\school[1]{\def\gdut@value@school{#1}} % 学校
 \renewcommand\title[1]{\def\gdut@value@chinesetitle{#1}} % 论文题目
+\newcommand\englishtitle[1]{\def\gdut@value@englishtitle{#1}} % 论文英文题目
 \newcommand\chinesedegree[1]{\def\gdut@value@chinesedegree{#1}} % 学位
 \newcommand\studentnumber[1]{\def\gdut@value@studentnumber{#1}} % 学号
 \newcommand\institute[1]{\def\gdut@value@college{#1}} % 学院
 \newcommand\major[1]{\def\gdut@value@major{#1}} % 专业
 \newcommand\class[1]{\def\gdut@value@class{#1}} % 年级班别
 \renewcommand\author[1]{\def\gdut@value@author{#1}} % 作者
+\renewcommand\authoren[1]{\def\gdut@value@authoren{#1}} % 作者英文名
 \newcommand\advisor[1]{\def\gdut@value@advisor{#1}} % 指导老师
 \newcommand\coursename[1]{\def\gdut@value@coursename{#1}} % 课程名称
 \newcommand\submitdate[1]{\def\gdut@value@submitdate{#1}} % 提交日期
@@ -68,7 +70,7 @@
 %  {}{}
 
 %%%%%%%%%%
-% PDF信息设置
+% bookmarks
 %%%%%%%%%%
 \RequirePackage[pdfstartview=FitH,
 CJKbookmarks=true,
@@ -83,7 +85,7 @@ citecolor=black,
 ]{hyperref}
 
 %%%%%%%%%%
-% bookmarks
+% PDF信息设置
 %%%%%%%%%%
 \AtBeginDocument{
   \hypersetup{
@@ -133,20 +135,25 @@ citecolor=black,
   \renewcommand{\headrulewidth}{0pt}
   % \fancyhead[RO]{\leftmark} % 章名
   % \fancyhead[LE]{\rightmark} % 节名
-  \fancyfoot[LE,RO]{\thepage}
+  \fancyfoot[LE,RO]{\footnotesize \thepage}
 }
+
 
 \fancypagestyle{plain}{
    \fancyhf{}
-   % \fancyfoot[LE,RO]{\thepage}
+   % \fancyfoot[LE,RO]{\footnotesize \thepage}
    \renewcommand{\headrulewidth}{0pt}
 }
 
-\fancypagestyle{translate}{
-  \fancyhead[C]{\huge \heiticu \chinese{thetranslate}、 \leftmark}
-  \fancyfoot[LE,RO]{\thepage}
+\fancypagestyle{translatechinese}{
+  \fancyfoot[LE,RO]{\footnotesize \thepage}
+  \fancyhead[C]{\huge\heiticu \chinese{thetranslate}、 外文参考文献翻译-译文}
 }
 
+\fancypagestyle{translateenglish}{
+  \fancyfoot[LE,RO]{\footnotesize \thepage}
+  \fancyhead[C]{\huge\heiticu \chinese{thetranslate}、 外文参考文献翻译-译文}
+}
 
 % 正文前部分页码显示方为罗马数字应用页面样式plain
 \renewcommand\frontmatter{
@@ -176,27 +183,33 @@ citecolor=black,
 % 论文翻译
 %%%%%%%%%%
 
+\newcommand{\nocontentsline}[3]{}% 强制不加入目录
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}%加在\chapter前使用
+\let\addcontentslinesave\addcontentsline%保存现场
+
 \newcounter{thetranslate}
 \newcommand\translateenglish{
-  \addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-原文}}
-  \def\leftmark{外文参考文献翻译-原文}
-  \thispagestyle{translate}
+  \cleardoublepage
   \stepcounter{thetranslate}
+  %\thispagestyle{translateenglish} % 页眉显示大标题
+  \vspace*{10pt}
+  {\centering \huge\heiticu \chinese{thetranslate}、外文参考文献翻译-原文\\}
+  \vspace*{20pt}
+  \let\addcontentsline\addcontentslinesave%还原现场
+  \addcontentsline{toc}{part}{\chinese{thetranslate}、外文参考文献翻译-原文}
+  \renewcommand{\addcontentsline}{\nocontentsline}% 防止加入目录
 }
 \newcommand\translatechinese{
-  \addcontentsline{toc}{chapter}{\protect\numberline{\thepage}{外文参考文献翻译-译文}}
-  \def\leftmark{外文参考文献翻译-译文}
-  \thispagestyle{translate}
+  \cleardoublepage
   \stepcounter{thetranslate}
-}
-
-% 1: chapter section subsection ...
-% 2: title
-% 3: pagenumber
-\newcommand\customertoc[3]{
-  \#1*{}
-  \setcounter{page}{#3}
-  \addcontentsline{toc}{#1}{#2}
+  %\thispagestyle{translatechinese} % 页眉显示大标题
+  \vspace*{10pt}
+  {\centering \huge\heiticu \chinese{thetranslate}、外文参考文献翻译-译文\\}
+  \vspace*{20pt}
+  %\part{外文参考文献翻译-译文}
+  \let\addcontentsline\addcontentslinesave%还原现场
+  \addcontentsline{toc}{part}{\chinese{thetranslate}、外文参考文献翻译-译文}
+  \renewcommand{\addcontentsline}{\nocontentsline}% 防止加入目录
 }
 
 %%%%%%%%%%
@@ -242,7 +255,7 @@ citecolor=black,
     aftername    = \quad,
     afterindent  = true,
     fixskip      = true,
-    beforeskip   = {0pt},
+    beforeskip   = {10pt},
     afterskip    = {20pt},
   },
   section={ % 节标题
@@ -255,6 +268,14 @@ citecolor=black,
     format       = \zihao{-4}\heiti,
     afterindent  = true,
     afterskip    = {8pt},
+  },
+  part={
+    format       = \huge\heiticu\centering,
+    name         = {,、}, % 不需要中文的 第X章
+    number       = \chinese{part},
+    aftername    = \nobreak,
+    beforeskip   = {10pt},
+    afterskip    = {20pt},
   },
   paragraph/afterindent = true,
   subparagraph/afterindent = true,
@@ -287,7 +308,12 @@ citecolor=black,
 \renewcommand{\cftdotsep}{0}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftchappagefont}{}
-\renewcommand{\cftbeforechapskip}{8pt}
+\renewcommand{\cftbeforechapskip}{0pt}
+
+\renewcommand{\cftpartfont}{\heiti}
+\renewcommand{\cftpartpagefont}{}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftbeforepartskip}{0pt}
 
 %%%%%%%%%%
 % 绘制封面
@@ -324,17 +350,17 @@ citecolor=black,
   }
   \vskip \stretch{1}
   {
-    \zihao{3}\heiticu
+    \zihao{3}\heiti 
     \def\arraystretch{1}
     \begin{tabular}{r @{\quad} p{7cm}<{\centering}}
     %\tabcolsep20pt
-    学\quad \quad 院 & \uline{\hfill \gdut@value@college \hfill} \\
-    专\quad \quad 业 & \uline{\hfill \gdut@value@major \hfill} \\
-    \ifthenelse{\equal{\gdut@value@concentration}{}}{}{& \uline{\hfill （\gdut@value@concentration） \hfill} \\}
-    年级班别 & \uline{\hfill \gdut@value@class \hfill} \\
-    学\quad \quad 号 & \uline{\hfill \gdut@value@studentnumber \hfill} \\
-    姓\quad \quad 名 & \uline{\hfill \gdut@value@author \hfill} \\
-    指导老师 & \uline{\hfill \gdut@value@advisor \hfill} \\
+    {学\quad \quad 院} & \heiticu \uline{\hfill \gdut@value@college \hfill} \\
+    {专\quad \quad 业} & \heiticu \uline{\hfill \gdut@value@major \hfill} \\
+    \ifthenelse{\equal{\gdut@value@concentration}{}}{}{& \heiticu \uline{\hfill （\gdut@value@concentration） \hfill} \\}
+    {年级班别} & \heiticu \uline{\hfill \gdut@value@class \hfill} \\
+    {学\quad \quad 号} & \heiticu \uline{\hfill \gdut@value@studentnumber \hfill} \\
+    {姓\quad \quad 名} & \heiticu \uline{\hfill \gdut@value@author \hfill} \\
+    {指导老师} & \heiticu \uline{\hfill \gdut@value@advisor \hfill} \\
     \end{tabular}
     \vfill
     \gdut@value@submitdate \\
@@ -486,6 +512,17 @@ citecolor=black,
 
 \setlist[enumerate,1]{itemindent=\parindent,label={\arabic{enumi}、}}
 \setlist[enumerate,2]{label={(\arabic{enumii})}}
+
+%%%%%%%%%%
+% 自定义标注
+%%%%%%%%%%
+
+% 自定义引用
+\newcommand{\custcite}[1]{$^{[#1]}$}
+
+% 自定义图标题
+\newcommand{\custfigcaption}[1]{\caption*{#1}} % 使用\caption*{}更直接
+\newcommand{\custtabcaption}[1]{\caption*{\heiticu #1}} % 在图环境伪造表的caption样式
 
 %%%%%%%%%%
 % 代码块

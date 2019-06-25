@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = thesis
+THESIS = translate
 
 # 翻页方向，留空表示不改变设置
 OPENSIDE = oneside
@@ -54,7 +54,7 @@ LATEX_FLAGS = -synctex=1 -interaction=nonstopmode -halt-on-error -output-directo
 
 DIRSTRUCTURES = $(TEX_DIR) $(BIB_DIR) $(FIG_DIR) $(OUTDIR)
 
-.PHONY: all xelatex bibtex validate cleanall view wordcount example cleanexample setside
+.PHONY: all xelatex bibtex validate cleanall view wordcount example cleanexample setside compulsory
 
 all: $(TARGET)
 
@@ -78,7 +78,7 @@ endif
 endif
 
 # 先检查规.need_latex则判断是否需要编译
-$(TARGET): $(OUTDIR)/.need_latex $(OUTDIR)/.need_bibtex | mkdirstructure setside
+$(TARGET): $(OUTDIR)/.$(THESIS)_need_latex $(OUTDIR)/.$(THESIS)_need_bibtex | mkdirstructure setside
 	$(Q) echo 编译$(THESIS).tex 原文
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
 	$(Q) echo 生成$(OUTDIR)/$(THESIS).bbl参考文献
@@ -89,26 +89,30 @@ $(TARGET): $(OUTDIR)/.need_latex $(OUTDIR)/.need_bibtex | mkdirstructure setside
 	$(Q) $(MAKE) -C . $(OUTDIR)/$(THESIS).aux
 	mv $(OUTDIR)/$(TARGET) .
 
+compulsory:
+	$(Q) $(RM) $(OUTDIR)/.$(THESIS)_need_latex
+	$(Q) $(RM) $(OUTDIR)/.$(THESIS)_need_bibtex
+
 # 当源码发生改变的时候更新.need_latex标记
-$(OUTDIR)/.need_latex: $(THESIS).tex $(TEX_FILES) $(FIG_FILES) configuration.cfg gdutthesis.cls Makefile | mkdirstructure
-	$(Q) touch $(OUTDIR)/.need_latex
+$(OUTDIR)/.$(THESIS)_need_latex: $(THESIS).tex $(TEX_FILES) $(FIG_FILES) configuration.cfg gdutthesis.cls Makefile | mkdirstructure
+	$(Q) touch $(OUTDIR)/.$(THESIS)_need_latex
 
 # 当.need_latex标记更新的时候才执行编译
-$(OUTDIR)/$(THESIS).aux: $(OUTDIR)/.need_latex
+$(OUTDIR)/$(THESIS).aux: $(OUTDIR)/.$(THESIS)_need_latex
 	$(LATEX) $(LATEX_FLAGS) $(THESIS)
 	$(Q) # 提示有bib没有编译
-	$(Q) if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_bibtex; fi
+	$(Q) if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.$(THESIS)_need_bibtex; fi
 	$(Q) # 提示有bib编译后还需编译一次aux修正交叉引用
-	$(Q) if [ "`grep "Package biblatex Warning: Please rerun LaTeX." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_latex; fi
+	$(Q) if [ "`grep "Package biblatex Warning: Please rerun LaTeX." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.$(THESIS)_need_latex; fi
 	$(Q) # 提示有交叉引用需要重新编译
-	$(Q) if [ "`grep "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.need_latex; fi
+	$(Q) if [ "`grep "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right." $(OUTDIR)/$(THESIS).log`" ]; then touch $(OUTDIR)/.$(THESIS)_need_latex; fi
 
-$(OUTDIR)/.need_bibtex: $(BIB_FILES) | mkdirstructure
-	touch $(OUTDIR)/.need_bibtex
+$(OUTDIR)/.$(THESIS)_need_bibtex: $(BIB_FILES) | mkdirstructure
+	touch $(OUTDIR)/.$(THESIS)_need_bibtex
 
-$(OUTDIR)/$(THESIS).bbl: $(OUTDIR)/.need_bibtex
+$(OUTDIR)/$(THESIS).bbl: $(OUTDIR)/.$(THESIS)_need_bibtex
 	$(BIBTEX) $(OUTDIR)/$(THESIS)
-	touch $(OUTDIR)/.need_latex
+	touch $(OUTDIR)/.$(THESIS)_need_latex
 
 # 建立工程目录结构
 mkdirstructure: $(DIRSTRUCTURES)
@@ -120,7 +124,7 @@ $(THESIS).tex configuration.cfg:
 	$(error Could not found $@; Try `make init` to start a new project)
 
 test:
-	if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then echo touch $(OUTDIR)/.need_bibtex; fi
+	if [ "`grep "Package biblatex Warning: Please (re)run Biber on the file:" $(OUTDIR)/$(THESIS).log`" ]; then echo touch $(OUTDIR)/.$(THESIS)_need_bibtex; fi
 
 init:
 	$(Q) if [ ! -f ${THESIS}.tex ]; then cp template/thesis.tex.template ${THESIS}.tex; fi
@@ -146,12 +150,14 @@ view: all
 wordcount:
 	$(Q) texcount $(shell find . -name '*.tex')
 
-example: example/gdutthesis.cls example/Makefile
-	$(MAKE) -C example/
-	$(PDFVIEWER) example/example.pdf
+example: example/gdutthesis.cls example/Makefile example/gdutthesis-excellent.cls
+	$(MAKE) -C example/ view
 
 example/gdutthesis.cls: gdutthesis.cls
 	$(Q) cp gdutthesis.cls example/gdutthesis.cls
+
+example/gdutthesis-excellent.cls: gdutthesis-excellent.cls
+	$(Q) cp gdutthesis-excellent.cls example/gdutthesis-excellent.cls
 
 example/Makefile: Makefile
 	$(Q) cp Makefile example/Makefile

@@ -1,5 +1,5 @@
 # 论文主tex文件名
-THESIS = thesis
+THESIS = example
 
 # 翻页方向，留空表示不改变设置
 OPENSIDE = oneside

@@ -442,6 +442,8 @@ citecolor=black,
 \preto{\printbibliography}{\renewcommand{\MakeUppercase}[1]{#1}}% 强制首字母大写其他小写
 %\appto{\printbibliography}{\let\MakeUppercase\MakeUppercaseorigin}%还原原始设置%会让引用出不来
 
+\urlstyle{same} % 设置参考文献中的\url字体也为Times New Roman
+
 %\RequirePackage[nottoc]{tocbibind}
 %\RequirePackage{gbt7714}
 
@@ -510,8 +512,11 @@ citecolor=black,
 \RequirePackage{enumerate} % 列表
 \RequirePackage{enumitem} % 列表缩进
 
-\setlist[enumerate,1]{itemindent=\parindent,label={\arabic{enumi}、}}
-\setlist[enumerate,2]{label={(\arabic{enumii})}}
+\setlength{\itemsep}{0ex}
+
+\setlist[enumerate,1]{itemindent=\parindent,label={\arabic{enumi}、},itemsep=0ex,parsep=0ex}
+\setlist[enumerate,2]{label={(\arabic{enumii})},itemsep=0ex,parsep=0ex}
+\setlength{\itemsep}{1pt}
 
 %%%%%%%%%%
 % 自定义标注

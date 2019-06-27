@@ -152,6 +152,6 @@ make THESIS=excellent
 
 # TODOLIST
 
-- [ ] “节”、“条”的段前、段后各设为 0.5 行
-- [ ] 生成的参考文献中`\url`字体设置为Times New Roman
+- [ ] “节”、“条”的段前、段后各设为 0.5 行。（貌似没有办法小于\baselineskip）
+- [x] 生成的参考文献中`\url`字体设置为Times New Roman
 - [ ] BUG: \MakeUppercase更改后若恢复原始内容则`参考文献`四个字无法加入目录的神奇问题

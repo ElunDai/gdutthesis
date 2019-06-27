@@ -432,14 +432,15 @@ citecolor=black,
 
 \RequirePackage[
   backend=biber,
-  style=gb7714-2015,
+  style=thirdparty/gb7714-2015,
   url=true,
   doi=false,
   eprint=false,
+  gbnamefmt=lowercase, % 小写显示英文作者
 ]{biblatex}
 
-\let\MakeUppercaseorigin\MakeUppercase%储存原始设置
-\preto{\printbibliography}{\renewcommand{\MakeUppercase}[1]{#1}}% 强制首字母大写其他小写
+%\let\MakeUppercaseorigin\MakeUppercase%储存原始设置
+%\preto{\printbibliography}{\renewcommand{\MakeUppercase}[1]{#1}}% 强制首字母大写其他小写
 %\appto{\printbibliography}{\let\MakeUppercase\MakeUppercaseorigin}%还原原始设置%会让引用出不来
 
 \urlstyle{same} % 设置参考文献中的\url字体也为Times New Roman

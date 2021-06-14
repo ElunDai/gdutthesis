@@ -93,7 +93,8 @@ citecolor=black,
 
 \RequirePackage{geometry} % 设置版面
 \geometry{
-  paper      = a4paper,
+  paperwidth = 18.5cm,
+  paperheight= 26cm,
   top        = 2.0cm,
   bottom     = 2.0cm,
   left       = 2.0cm,
